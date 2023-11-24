@@ -43,22 +43,6 @@ const Sidebar = () => {
         </NavLink>
         {user && (
           <>
-            <NavLink
-              to={"/myAssignments"}
-              className={({ isActive }) =>
-                isActive ? " bg-none text-red-500 font-bold" : ""
-              }
-            >
-              My Assignments
-            </NavLink>
-            <NavLink
-              to={"/submittedAssignments"}
-              className={({ isActive }) =>
-                isActive ? " bg-none text-red-500 font-bold" : ""
-              }
-            >
-              Submitted Assignments
-            </NavLink>
             <button onClick={handleLogOut}>Log out</button>
           </>
         )}
