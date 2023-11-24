@@ -5,17 +5,22 @@ import { IoMdEyeOff } from "react-icons/io";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import SocialLogin from "../SocialLogin/SocialLogin";
+import useAuth from "../../../Hooks/useAuth";
 
 const Login = () => {
   const [showPass, setShowPass] = useState();
-
+  const { login } = useAuth();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => {
+    login(data.email, data.password).then((result) => {
+      console.log(result);
+    });
+  };
 
   return (
     <>

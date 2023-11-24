@@ -11,7 +11,7 @@ const Registration = () => {
   const [showPass, setShowPass] = useState();
 
   const { registerUser, handleUpdateProfile } = useAuth();
-
+  const badge = "Bronze";
   const {
     register,
     handleSubmit,
@@ -25,6 +25,7 @@ const Registration = () => {
         const userInfo = {
           name: data.name,
           email: data.email,
+          badge,
         };
         console.log(userInfo);
       });

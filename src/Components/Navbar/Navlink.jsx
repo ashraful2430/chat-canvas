@@ -5,10 +5,10 @@ import useAuth from "../../Hooks/useAuth";
 import { IoIosNotifications } from "react-icons/io";
 
 const Navlink = () => {
-  const { user, logOut } = useAuth();
-
+  const { user, logout } = useAuth();
+  console.log(user);
   const handleLogOut = () => {
-    logOut()
+    logout()
       .then((result) => {
         console.log(result);
       })
@@ -51,7 +51,7 @@ const Navlink = () => {
             <NavLink
               to={"/"}
               className={({ isActive }) =>
-                isActive ? " bg-none text-red-500 font-bold" : ""
+                isActive ? " bg-none text-blue-500 font-bold" : ""
               }
             >
               Home
@@ -59,7 +59,7 @@ const Navlink = () => {
             <NavLink
               to={"/membership"}
               className={({ isActive }) =>
-                isActive ? " bg-none text-red-500 font-bold" : ""
+                isActive ? " bg-none text-blue-500 font-bold" : ""
               }
             >
               Membership
@@ -97,7 +97,7 @@ const Navlink = () => {
                 </button>
               </li>
               <li>
-                <p>Dashboard</p>
+                <p className=" font-medium mx-auto">Dashboard</p>
               </li>
             </ul>
           </div>
