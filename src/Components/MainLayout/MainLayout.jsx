@@ -11,7 +11,7 @@ const MainLayout = () => {
       <div>
         <Outlet></Outlet>
       </div>
-      <div>
+      <div className="h-[calc(100vh-100px)]">
         <Footer></Footer>
       </div>
     </div>
