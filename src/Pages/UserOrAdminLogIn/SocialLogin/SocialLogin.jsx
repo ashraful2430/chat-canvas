@@ -1,10 +1,38 @@
+import { useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../../Hooks/useAuth";
+import useAxiosPublic from "../../../Hooks/useAxiosPublic";
+import Swal from "sweetalert2";
 
 const SocialLogin = () => {
   const { googleSignIn } = useAuth();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const from = location.state?.from?.pathname || "/";
+  const axiosPublic = useAxiosPublic();
+
+  const badge = "Bronze";
+
   const handleGoogleSignIn = () => {
-    googleSignIn().then((res) => {
-      console.log(res.user);
+    googleSignIn().then((result) => {
+      const userInfo = {
+        email: result.user?.email,
+        name: result.user?.displayName,
+        badge,
+      };
+      axiosPublic.post("/users", userInfo).then((res) => {
+        if (res.data.insertedId) {
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "User Logged in successfully",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          navigate(from, { replace: true });
+        }
+      });
+
+      navigate(from, { replace: true });
     });
   };
   return (

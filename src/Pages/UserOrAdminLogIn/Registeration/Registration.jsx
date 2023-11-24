@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "../../../assets/logo.png";
 import { FaEye } from "react-icons/fa";
 import { IoMdEyeOff } from "react-icons/io";
@@ -6,9 +6,15 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import useAuth from "../../../Hooks/useAuth";
 import SocialLogin from "../SocialLogin/SocialLogin";
+import useAxiosPublic from "../../../Hooks/useAxiosPublic";
+import Swal from "sweetalert2";
 
 const Registration = () => {
   const [showPass, setShowPass] = useState();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const from = location.state?.from?.pathname || "/";
+  const axiosPublic = useAxiosPublic();
 
   const { registerUser, handleUpdateProfile } = useAuth();
   const badge = "Bronze";
@@ -19,17 +25,37 @@ const Registration = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    registerUser(data.email, data.password).then((result) => {
-      console.log(result);
-      handleUpdateProfile(data.name).then(() => {
-        const userInfo = {
-          name: data.name,
-          email: data.email,
-          badge,
-        };
-        console.log(userInfo);
+    registerUser(data.email, data.password)
+      .then((result) => {
+        console.log(result);
+        handleUpdateProfile(data.name).then(() => {
+          const userInfo = {
+            name: data.name,
+            email: data.email,
+            badge,
+          };
+          axiosPublic.post("/users", userInfo).then((res) => {
+            if (res.data.insertedId) {
+              Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "User registered successfully",
+                showConfirmButton: false,
+                timer: 1500,
+              });
+              navigate(from, { replace: true });
+            }
+          });
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        Swal.fire({
+          title: "Sorry!",
+          text: "Something went wrong please try again",
+          icon: "error",
+        });
       });
-    });
   };
 
   return (

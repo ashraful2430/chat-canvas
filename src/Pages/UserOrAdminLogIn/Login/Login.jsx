@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "../../../assets/logo.png";
 import { FaEye } from "react-icons/fa";
 import { IoMdEyeOff } from "react-icons/io";
@@ -6,10 +6,14 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import SocialLogin from "../SocialLogin/SocialLogin";
 import useAuth from "../../../Hooks/useAuth";
+import Swal from "sweetalert2";
 
 const Login = () => {
   const [showPass, setShowPass] = useState();
   const { login } = useAuth();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const from = location.state?.from?.pathname || "/";
   const {
     register,
     handleSubmit,
@@ -19,6 +23,14 @@ const Login = () => {
   const onSubmit = (data) => {
     login(data.email, data.password).then((result) => {
       console.log(result);
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "User Logged in successfully",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      navigate(from, { replace: true });
     });
   };
 

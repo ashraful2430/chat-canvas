@@ -2,9 +2,10 @@ import PropTypes from "prop-types";
 import useAuth from "../../Hooks/useAuth";
 import animation from "../../assets/loading.json";
 import Lottie from "lottie-react";
-import { Navigate } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 
 const PrivateRoute = ({ children }) => {
+  const location = useLocation();
   const { user, loading } = useAuth();
   if (loading) {
     return <Lottie animationData={animation}></Lottie>;
@@ -12,7 +13,7 @@ const PrivateRoute = ({ children }) => {
   if (user) {
     return children;
   }
-  return <Navigate state={location.pathname} to={"/login"}></Navigate>;
+  return <Navigate state={{ from: location }} to={"/login"}></Navigate>;
 };
 
 PrivateRoute.propTypes = {
