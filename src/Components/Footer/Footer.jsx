@@ -3,8 +3,8 @@ import logo from "../../assets/logo.png";
 const Footer = () => {
   return (
     <>
-      <footer className="text-gray-600 body-font">
-        <div className="container px-5 py-24 mx-auto">
+      <footer className="text-gray-600 body-font mt-28">
+        <div className="container px-5 py-10 mx-auto">
           <div className="flex flex-wrap md:text-left text-center order-first">
             <div className="lg:w-1/4 md:w-1/2 w-full px-4">
               <h2 className="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">
@@ -119,7 +119,7 @@ const Footer = () => {
           </div>
         </div>
         <div className="bg-gray-100">
-          <div className="container px-5 py-6 mx-auto flex items-center sm:flex-row flex-col">
+          <div className="container px-5  mx-auto flex items-center sm:flex-row flex-col">
             <div className="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
               <img className="w-44" src={logo} alt="" />
               <span className="ml-3 text-xl">Chat Canvas</span>
