@@ -1,39 +1,68 @@
+import { useForm } from "react-hook-form";
 import useAuth from "../../../Hooks/useAuth";
 import Container from "../../../Shared/Container/Container";
+import useAxiosPublic from "../../../Hooks/useAxiosPublic";
+import Swal from "sweetalert2";
 
+const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
+const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 const AddPost = () => {
   const { user } = useAuth();
+  const axiosPublic = useAxiosPublic();
   const upVote = 0;
   const downVote = 0;
-  const seeData = (e) => {
-    e.preventDefault();
-    const form = e.target;
-    const name = form.name.value;
-    const email = form.email.value;
-    const tags = form.tags.value;
-    const title = form.title.value;
-    const details = form.details.value;
-    const all = {
-      name,
-      email,
-      tags,
-      title,
-      details,
-      upVote,
-      downVote,
-    };
-    console.log(all);
+  const {
+    register,
+    handleSubmit,
+    watch,
+    reset,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = async (data) => {
+    console.log(data);
+    const imageFile = { image: data.authorImg[0] };
+    const res = await axiosPublic.post(image_hosting_api, imageFile, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    if (res.data.success) {
+      const postInfo = {
+        authorName: data.authorName,
+        authorEmail: data.authorEmail,
+        tag: data.tag,
+        details: data.details,
+        title: data.title,
+        upVote,
+        downVote,
+        authorImg: res.data.data.display_url,
+        date: new Date(),
+      };
+      const addedPost = await axiosPublic.post("/posts", postInfo);
+      console.log(addedPost);
+      if (addedPost.data.insertedId) {
+        reset();
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Your post has been added successfully",
+          showConfirmButton: false,
+          timer: 2000,
+        });
+      }
+    }
   };
   return (
     <div>
       <Container>
         <div>
           <h3 className="text-center font-medium text-3xl my-14 underline">
-            Add Post
+            Add A Post
           </h3>
         </div>
         <div className="space-y-6">
-          <form onSubmit={seeData}>
+          <form onSubmit={handleSubmit(onSubmit)}>
             {/* Author Name */}
             <div className="flex flex-col lg:flex-row gap-3">
               <div className="form-control w-full">
@@ -43,9 +72,14 @@ const AddPost = () => {
                 <input
                   type="text"
                   placeholder="Author Name"
+                  defaultValue={user.displayName}
+                  {...register("authorName", { required: true })}
+                  name=""
                   className="input input-bordered w-full"
-                  name="name"
                 />
+                {errors.authorName && (
+                  <span className="text-red-500">Your name is required</span>
+                )}
               </div>
               {/* author email */}
               <div className="form-control w-full">
@@ -53,35 +87,45 @@ const AddPost = () => {
                   <span className="label-text">Your email*</span>
                 </label>
                 <input
-                  type="text"
+                  type="email"
                   placeholder="Author email"
                   defaultValue={user.email}
+                  {...register("authorEmail", { required: true })}
                   name="email"
                   className="input input-bordered w-full"
                 />
+                {errors.authorEmail && (
+                  <span className="text-red-500">Your email is required</span>
+                )}
               </div>
             </div>
             {/* tags  */}
 
-            <div className="flex gap-4">
+            <div className="flex flex-col lg:flex-row gap-4">
               <div className="flex-1">
                 <label className="label">
                   <span className="label-text">Tags*</span>
                 </label>
                 <select
-                  defaultValue="default"
+                  value={watch("tag") || ""}
                   name="tags"
+                  {...register("tag", { required: true })}
                   className="select select-bordered w-full"
                 >
-                  <option disabled value="default">
+                  <option value="" disabled>
                     Select Tags
                   </option>
-                  <option value="salad">TechTalk</option>
-                  <option value="pizza">ArtistryHub</option>
-                  <option value="soup">HealthyLiving</option>
-                  <option value="desert">TravelJunkie</option>
-                  <option value="drinks">EcoEnthusiasts</option>
+                  <option value="TechTalk">TechTalk</option>
+                  <option value="ArtistryHub">ArtistryHub</option>
+                  <option value="HealthyLiving">HealthyLiving</option>
+                  <option value="TravelJunkie">TravelJunkie</option>
+                  <option value="EcoEnthusiasts">EcoEnthusiasts</option>
                 </select>
+                {errors.tag && (
+                  <span className="text-red-500">
+                    Please choose an relevant tag for your post
+                  </span>
+                )}
               </div>
               {/* post title */}
               <div className="form-control flex-1">
@@ -92,8 +136,12 @@ const AddPost = () => {
                   type="text"
                   placeholder="Title"
                   name="title"
+                  {...register("title", { required: true })}
                   className="input input-bordered w-full"
                 />
+                {errors.title && (
+                  <span className="text-red-500">Title is required</span>
+                )}
               </div>
             </div>
             {/* recipe details */}
@@ -105,8 +153,12 @@ const AddPost = () => {
                 <textarea
                   className="textarea textarea-bordered h-32"
                   name="details"
+                  {...register("details", { required: true })}
                   placeholder="Post Details"
                 ></textarea>
+                {errors.details && (
+                  <span className="text-red-500">Detail is required</span>
+                )}
               </div>
             </div>
             {/* file input */}
@@ -114,9 +166,13 @@ const AddPost = () => {
             <div>
               <input
                 type="file"
+                {...register("authorImg", { required: true })}
                 className="file-input file-input-bordered w-full max-w-xs mt-7"
               />
               <p>Chose your Image</p>
+              {errors.authorImg && (
+                <span className="text-red-500">Your image is required</span>
+              )}
             </div>
             <div>
               <button

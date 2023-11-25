@@ -1,12 +1,12 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 const firebaseConfig = {
-  apiKey: "AIzaSyBUldJACwsnny_jhCDKPAbcZqqWQyhOFpU",
-  authDomain: "chat-canvas-725c3.firebaseapp.com",
-  projectId: "chat-canvas-725c3",
-  storageBucket: "chat-canvas-725c3.appspot.com",
-  messagingSenderId: "267142720379",
-  appId: "1:267142720379:web:a2137d5417d3860205ebde",
+  apiKey: import.meta.env.VITE_apiKey,
+  authDomain: import.meta.env.VITE_authDomain,
+  projectId: import.meta.env.VITE_projectId,
+  storageBucket: import.meta.env.VITE_storageBucket,
+  messagingSenderId: import.meta.env.VITE_messagingSenderId,
+  appId: import.meta.env.VITE_appId,
 };
 
 // Initialize Firebase
