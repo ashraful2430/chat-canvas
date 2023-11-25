@@ -16,6 +16,9 @@ const Navlink = () => {
         console.error(error);
       });
   };
+
+  const defaultPhoto =
+    "https://i.ibb.co/Fhm4brM/Screenshot-2023-11-25-145934.jpg";
   return (
     <div className="w-full navbar bg-base-100 shadow-xl">
       <Container>
@@ -75,10 +78,10 @@ const Navlink = () => {
           </div>
         </div>
         {user?.email ? (
-          <div className="dropdown dropdown-end z-50">
+          <div className="dropdown dropdown-end z-50 text-center">
             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
               <div className="w-10 rounded-full">
-                <img src={user.photoURL} />
+                <img src={user.photoURL ? user?.photoURL : defaultPhoto} />
               </div>
             </label>
             <ul
@@ -97,7 +100,9 @@ const Navlink = () => {
                 </button>
               </li>
               <li>
-                <p className=" font-medium mx-auto">Dashboard</p>
+                <Link to={"/dashboard/My-profile"}>
+                  <p className=" font-medium ml-10">Dashboard</p>
+                </Link>
               </li>
             </ul>
           </div>
