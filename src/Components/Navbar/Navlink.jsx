@@ -6,7 +6,6 @@ import { IoIosNotifications } from "react-icons/io";
 
 const Navlink = () => {
   const { user, logout } = useAuth();
-  console.log(user);
   const handleLogOut = () => {
     logout()
       .then((result) => {

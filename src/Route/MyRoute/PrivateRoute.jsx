@@ -8,7 +8,12 @@ const PrivateRoute = ({ children }) => {
   const location = useLocation();
   const { user, loading } = useAuth();
   if (loading) {
-    return <Lottie animationData={animation}></Lottie>;
+    return (
+      <Lottie
+        className="w-40 flex justify-center items-center mx-auto min-h-screen"
+        animationData={animation}
+      ></Lottie>
+    );
   }
   if (user) {
     return children;
