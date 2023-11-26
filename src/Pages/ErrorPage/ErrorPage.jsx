@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 
 const ErrorPage = () => {
   return (
-    <div className="min-h-screen">
+    <div className="">
       <Lottie
-        className="w-[900px] mx-auto"
+        className="w-[400px] md:w-[900px] mx-auto"
         animationData={errorAnimation}
       ></Lottie>
       <div className="text-center">

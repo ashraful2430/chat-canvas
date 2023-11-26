@@ -14,8 +14,10 @@ const Banner = () => {
           <div className="hero-overlay bg-opacity-70"></div>
           <div className="hero-content text-center text-neutral-content">
             <div className="max-w-2xl">
-              <h1 className="mb-5 text-5xl font-bold">Join the Conversation</h1>
-              <p className="mb-5">
+              <h1 className="mb-5 text-2xl md:text-5xl font-bold">
+                Join the Conversation
+              </h1>
+              <p className="mb-5 text-sm md:text-base">
                 Discover a vibrant community where ideas flourish and
                 discussions thrive. Engage with like-minded individuals, share
                 your insights, and explore a world of diverse conversations.
