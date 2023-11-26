@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 
-const AllPostCard = ({ post }) => {
+const ShowRecentPost = ({ post }) => {
   const { title, authorName, authorEmail, tag, details, date, authorImg } =
     post;
   return (
@@ -36,8 +36,8 @@ const AllPostCard = ({ post }) => {
   );
 };
 
-AllPostCard.propTypes = {
+ShowRecentPost.propTypes = {
   post: PropTypes.object,
 };
 
-export default AllPostCard;
+export default ShowRecentPost;

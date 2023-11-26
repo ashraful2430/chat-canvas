@@ -3,6 +3,9 @@ import useAuth from "../../../Hooks/useAuth";
 import useProfile from "../../../Hooks/useProfile";
 import tanstackLoading from "../../../assets/tanstack.json";
 import Container from "../../../Shared/Container/Container";
+import useLoadThreeData from "../../../Hooks/useLoadThreeData";
+import loading from "../../../assets/loading.json";
+import ShowRecentPost from "./ShowRecentPost";
 
 const MyProfile = () => {
   const { user } = useAuth();
@@ -10,6 +13,16 @@ const MyProfile = () => {
   const defaultPhoto =
     "https://i.ibb.co/Fhm4brM/Screenshot-2023-11-25-145934.jpg";
 
+  const [threeData, isLoading] = useLoadThreeData();
+  console.log(threeData, isLoading);
+  if (isLoading) {
+    return (
+      <Lottie
+        className="w-40 flex justify-center items-center mx-auto min-h-screen"
+        animationData={loading}
+      ></Lottie>
+    );
+  }
   if (isPending) {
     return (
       <Lottie
@@ -28,7 +41,7 @@ const MyProfile = () => {
       <Container>
         <div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 p-10">
-            <div className="lg:col-span-1 mx-auto md:mx-0 mb-10 text-center md:text-left ">
+            <div className="lg:col-span-1 mx-auto md:mx-0 text-center md:text-left ">
               <img
                 className="w-36 rounded-full"
                 src={user.photoURL ? user.photoURL : defaultPhoto}
@@ -57,11 +70,16 @@ const MyProfile = () => {
                   </p>
                 )}
               </div>
-              <div className="mt-10">
-                <h3 className="text-center text-2xl font-medium">
-                  My recent three posts
-                </h3>
-              </div>
+            </div>
+          </div>
+          <div className="">
+            <h3 className="text-center text-4xl font-medium mb-10">
+              My recent three posts
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {threeData.map((post) => (
+                <ShowRecentPost key={post._id} post={post}></ShowRecentPost>
+              ))}
             </div>
           </div>
         </div>

@@ -4,14 +4,18 @@ import useAxiosPublic from "./useAxiosPublic";
 const usePosts = () => {
   const axiosPublic = useAxiosPublic();
 
-  const { isPending, data: posts = [] } = useQuery({
+  const {
+    isPending,
+    refetch,
+    data: posts = [],
+  } = useQuery({
     queryKey: ["posts"],
     queryFn: async () => {
-      const res = await axiosPublic.get("/posts");
+      const res = await axiosPublic.get("/posts/all");
       return res.data;
     },
   });
-  return [posts, isPending];
+  return [posts, isPending, refetch];
 };
 
 export default usePosts;
