@@ -4,25 +4,15 @@ import loading from "../../assets/loading.json";
 import Container from "../../Shared/Container/Container";
 import AllPostCard from "./AllPostCard";
 import { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
-import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import usePosts from "../../Hooks/usePosts";
 
-const AllPosts = ({ count }) => {
-  const axiosPublic = useAxiosPublic();
+const AllPosts = ({ count, search }) => {
   const [itemPerPage, setItemPerPage] = useState(5);
   const [currentPage, setCurrentPage] = useState(0);
   const totalPage = Math.ceil(count / itemPerPage);
   const pages = [...Array(totalPage).keys()];
+  const [posts, isPending] = usePosts(currentPage, itemPerPage, search);
 
-  const { isPending, data: posts = [] } = useQuery({
-    queryKey: ["posts", currentPage, itemPerPage],
-    queryFn: async () => {
-      const res = await axiosPublic.get(
-        `/posts/all?page=${currentPage}&size=${itemPerPage}`
-      );
-      return res.data;
-    },
-  });
   if (isPending) {
     return (
       <Lottie
@@ -33,7 +23,6 @@ const AllPosts = ({ count }) => {
   }
 
   const handleItemPerPage = (e) => {
-    console.log(e.target.value);
     const value = parseInt(e.target.value);
     setItemPerPage(value);
     setCurrentPage(0);
@@ -107,6 +96,7 @@ const AllPosts = ({ count }) => {
 
 AllPosts.propTypes = {
   count: PropTypes.number,
+  search: PropTypes.string,
 };
 
 export default AllPosts;

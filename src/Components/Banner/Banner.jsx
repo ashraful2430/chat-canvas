@@ -1,6 +1,13 @@
 import Container from "../../Shared/Container/Container";
 
-const Banner = () => {
+import PropTypes from "prop-types";
+
+const Banner = ({ onSearch }) => {
+  const handleSearch = (e) => {
+    e.preventDefault();
+    const searchText = e.target.search.value;
+    onSearch(searchText);
+  };
   return (
     <>
       <Container>
@@ -24,31 +31,40 @@ const Banner = () => {
                 Welcome to a forum where your voice matters. Join us and let the
                 dialogue begin!
               </p>
-              <div className="flex w-full justify-center items-end">
-                <div className="relative mr-4 lg:w-full xl:w-1/2 w-2/4 md:w-full text-left">
-                  <label
-                    htmlFor="hero-field"
-                    className="leading-7 text-sm text-white"
+              <form onSubmit={handleSearch}>
+                <div className="flex w-full justify-center items-end">
+                  <div className="relative mr-4 lg:w-full xl:w-1/2 w-2/4 md:w-full text-left">
+                    <label
+                      htmlFor="hero-field"
+                      className="leading-7 text-sm text-white"
+                    >
+                      Search via tags
+                    </label>
+                    <input
+                      type="text"
+                      id="hero-field"
+                      name="search"
+                      className="w-full bg-gray-100 bg-opacity-50 rounded focus:ring-2 focus:ring-indigo-200 focus:bg-transparent border border-gray-300 focus:border-indigo-500 text-base outline-none text-white py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                    />
+                  </div>
+                  <button
+                    type="submit"
+                    className="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg"
                   >
-                    Search via tags
-                  </label>
-                  <input
-                    type="text"
-                    id="hero-field"
-                    name="hero-field"
-                    className="w-full bg-gray-100 bg-opacity-50 rounded focus:ring-2 focus:ring-indigo-200 focus:bg-transparent border border-gray-300 focus:border-indigo-500 text-base outline-none text-white py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-                  />
+                    Search
+                  </button>
                 </div>
-                <button className="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">
-                  Search
-                </button>
-              </div>
+              </form>
             </div>
           </div>
         </div>
       </Container>
     </>
   );
+};
+
+Banner.propTypes = {
+  onSearch: PropTypes.func,
 };
 
 export default Banner;
