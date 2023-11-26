@@ -1,11 +1,28 @@
+import PropTypes from "prop-types";
 import Lottie from "lottie-react";
-import usePosts from "../../Hooks/usePosts";
 import loading from "../../assets/loading.json";
 import Container from "../../Shared/Container/Container";
 import AllPostCard from "./AllPostCard";
+import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
 
-const AllPosts = () => {
-  const [posts, isPending] = usePosts();
+const AllPosts = ({ count }) => {
+  const axiosPublic = useAxiosPublic();
+  const [itemPerPage, setItemPerPage] = useState(5);
+  const [currentPage, setCurrentPage] = useState(0);
+  const totalPage = Math.ceil(count / itemPerPage);
+  const pages = [...Array(totalPage).keys()];
+
+  const { isPending, data: posts = [] } = useQuery({
+    queryKey: ["posts", currentPage, itemPerPage],
+    queryFn: async () => {
+      const res = await axiosPublic.get(
+        `/posts/all?page=${currentPage}&size=${itemPerPage}`
+      );
+      return res.data;
+    },
+  });
   if (isPending) {
     return (
       <Lottie
@@ -14,6 +31,26 @@ const AllPosts = () => {
       ></Lottie>
     );
   }
+
+  const handleItemPerPage = (e) => {
+    console.log(e.target.value);
+    const value = parseInt(e.target.value);
+    setItemPerPage(value);
+    setCurrentPage(0);
+  };
+
+  const handlePrevPage = () => {
+    if (currentPage > 0) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  const handleNextPage = () => {
+    if (currentPage < pages.length - 1) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
   return (
     <>
       <div className="mt-10">
@@ -26,10 +63,50 @@ const AllPosts = () => {
               <AllPostCard key={post._id} post={post}></AllPostCard>
             ))}
           </div>
+          <div className="text-center mt-6 ">
+            <button
+              onClick={handlePrevPage}
+              className="btn btn-square bg-blue-500 text-white"
+            >
+              Prev
+            </button>
+            {pages.map((page, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentPage(page)}
+                className={`btn btn-square ml-2 text-white ${
+                  currentPage === page ? "bg-purple-500" : "bg-blue-500"
+                }`}
+              >
+                {page}
+              </button>
+            ))}
+            <button
+              onClick={handleNextPage}
+              className="btn btn-square ml-2 bg-blue-500 text-white"
+            >
+              Next
+            </button>
+            <select
+              className="ml-4 border-2 py-3 px-1 rounded-lg"
+              defaultValue={itemPerPage}
+              onChange={handleItemPerPage}
+              name=""
+              id=""
+            >
+              <option value="3">3</option>
+              <option value="5">5</option>
+              <option value="10">10</option>
+            </select>
+          </div>
         </Container>
       </div>
     </>
   );
+};
+
+AllPosts.propTypes = {
+  count: PropTypes.number,
 };
 
 export default AllPosts;

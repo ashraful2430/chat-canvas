@@ -21,6 +21,7 @@ const routes = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>,
+        loader: () => fetch("http://localhost:5000/postCount"),
       },
       {
         path: "/membership",
