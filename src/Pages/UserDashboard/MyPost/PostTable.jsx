@@ -3,6 +3,7 @@ import { FaCommentAlt } from "react-icons/fa";
 import { MdDeleteForever } from "react-icons/md";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import { Link } from "react-router-dom";
 
 const PostTable = ({ post, index, refetch }) => {
   const { title, _id } = post;
@@ -40,9 +41,11 @@ const PostTable = ({ post, index, refetch }) => {
         <td>Up votes</td>
         <td>Down votes</td>
         <td>
-          <button>
-            <FaCommentAlt className="text-3xl ml-3 text-blue-500" />
-          </button>
+          <Link to={`/dashboard/comments/${_id}`}>
+            <button>
+              <FaCommentAlt className="text-3xl ml-3 text-blue-500" />
+            </button>
+          </Link>
         </td>
         <td>
           <button onClick={() => handleDelete(_id)}>

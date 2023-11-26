@@ -10,6 +10,7 @@ import MyProfile from "../../Pages/UserDashboard/MyProfile/MyProfile";
 import PrivateRoute from "./PrivateRoute";
 import AddPost from "../../Pages/UserDashboard/AddPost/AddPost";
 import MyPost from "../../Pages/UserDashboard/MyPost/MyPost";
+import ShowComment from "../../Pages/UserDashboard/ShowComment/ShowComment";
 
 const routes = createBrowserRouter([
   {
@@ -67,6 +68,16 @@ const routes = createBrowserRouter([
             <MyPost></MyPost>
           </PrivateRoute>
         ),
+      },
+      {
+        path: "comments/:id",
+        element: (
+          <PrivateRoute>
+            <ShowComment></ShowComment>
+          </PrivateRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/posts/all/${params.id}`),
       },
     ],
   },
