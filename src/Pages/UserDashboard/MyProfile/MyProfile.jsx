@@ -14,7 +14,6 @@ const MyProfile = () => {
     "https://i.ibb.co/Fhm4brM/Screenshot-2023-11-25-145934.jpg";
 
   const [threeData, isLoading] = useLoadThreeData();
-  console.log(threeData, isLoading);
   if (isLoading) {
     return (
       <Lottie

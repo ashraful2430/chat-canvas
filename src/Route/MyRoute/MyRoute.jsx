@@ -9,6 +9,7 @@ import Dashboard from "../../Components/Dashboard/Dashboard";
 import MyProfile from "../../Pages/UserDashboard/MyProfile/MyProfile";
 import PrivateRoute from "./PrivateRoute";
 import AddPost from "../../Pages/UserDashboard/AddPost/AddPost";
+import MyPost from "../../Pages/UserDashboard/MyPost/MyPost";
 
 const routes = createBrowserRouter([
   {
@@ -56,6 +57,14 @@ const routes = createBrowserRouter([
         element: (
           <PrivateRoute>
             <AddPost></AddPost>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "my-post",
+        element: (
+          <PrivateRoute>
+            <MyPost></MyPost>
           </PrivateRoute>
         ),
       },

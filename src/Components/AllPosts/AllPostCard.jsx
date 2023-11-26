@@ -9,9 +9,7 @@ const AllPostCard = ({ post }) => {
         <div className="card-body">
           <h2 className="card-title">{title}</h2>
           <p>{details}</p>
-          <p className="badge badge-outline mt-5 bg-blue-500 text-white">
-            #{tag}
-          </p>
+          <p className=" mt-5 ">Tag: #{tag}</p>
           <div className="mt-4 flex items-center gap-4">
             <div>
               <img className="w-14 h-14 rounded-full" src={authorImg} alt="" />
