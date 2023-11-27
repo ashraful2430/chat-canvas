@@ -6,7 +6,7 @@ import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { Link } from "react-router-dom";
 
 const PostTable = ({ post, index, refetch }) => {
-  const { title, _id } = post;
+  const { title, _id, upVote, downVote } = post;
   const axiosSecure = useAxiosSecure();
 
   const handleDelete = (id) => {
@@ -38,8 +38,8 @@ const PostTable = ({ post, index, refetch }) => {
       <tr>
         <th>{index + 1}</th>
         <td>{title}</td>
-        <td>Up votes</td>
-        <td>Down votes</td>
+        <td>Up votes:{upVote}</td>
+        <td>Down votes:{downVote} </td>
         <td>
           <Link to={`/dashboard/comments/${_id}`}>
             <button>

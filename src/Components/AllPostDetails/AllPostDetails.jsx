@@ -8,8 +8,10 @@ import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import useCommentCount from "../../Hooks/useCommentCount";
 import { useState } from "react";
+import useAuth from "../../Hooks/useAuth";
 
 const AllPostDetails = () => {
+  const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   const postDetails = useLoaderData();
   const {
@@ -41,9 +43,6 @@ const AllPostDetails = () => {
         `/posts/upvote/${_id}`,
         upVoteInfo
       );
-      if (updateVote.data.modifiedCount > 0) {
-        alert("Upvote done");
-      }
       console.log(updateVote);
     }
   };
@@ -57,9 +56,6 @@ const AllPostDetails = () => {
         `/posts/downvote/${_id}`,
         downVoteInfo
       );
-      if (updateDownVote.data.modifiedCount > 0) {
-        alert("Downvote successful");
-      }
       console.log(updateDownVote);
     }
   };
@@ -72,6 +68,8 @@ const AllPostDetails = () => {
     const commentInfo = {
       comment,
       postId,
+      commentUser: user.displayName,
+      commentEmail: user.email,
     };
     const addComments = await axiosSecure.post("/comments", commentInfo);
     if (addComments.data.insertedId) {
@@ -120,10 +118,7 @@ const AllPostDetails = () => {
                   {/* up vote */}
                   <button
                     onClick={handleUpVote}
-                    className={`flex items-center gap-3 ${
-                      voted === "down" ? "disabled" : ""
-                    }`}
-                    disabled={voted === "down"}
+                    className={`flex items-center gap-3 `}
                   >
                     <AiOutlineLike className="text-2xl text-blue-500 " />
                     {upVoteCount}
@@ -131,10 +126,7 @@ const AllPostDetails = () => {
                   {/* down vote */}
                   <button
                     onClick={handleDownVote}
-                    className={`flex items-center gap-3 ${
-                      voted === "up" ? "disabled" : ""
-                    }`}
-                    disabled={voted === "up"}
+                    className={`flex items-center gap-3`}
                   >
                     <AiOutlineDislike className="text-2xl text-red-500" />
                     {downVoteCount}
