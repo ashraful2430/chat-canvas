@@ -9,9 +9,14 @@ import usePosts from "../../Hooks/usePosts";
 const AllPosts = ({ count, search }) => {
   const [itemPerPage, setItemPerPage] = useState(5);
   const [currentPage, setCurrentPage] = useState(0);
+  const [sortBy, setSortBy] = useState("");
   const totalPage = Math.ceil(count / itemPerPage);
   const pages = [...Array(totalPage).keys()];
-  const [posts, isPending] = usePosts(currentPage, itemPerPage, search);
+  const [posts, isPending] = usePosts(currentPage, itemPerPage, search, sortBy);
+  const handleSortByPopularity = () => {
+    setSortBy("popularity");
+    setCurrentPage(0);
+  };
 
   if (isPending) {
     return (
@@ -48,7 +53,12 @@ const AllPosts = ({ count, search }) => {
             <h3 className="text-center text-3xl font-medium">All Posts</h3>
           </div>
           <div>
-            <button className="btn btn-outline">Most Popular Posts</button>
+            <button
+              onClick={handleSortByPopularity}
+              className="btn btn-outline"
+            >
+              Most Popular Posts
+            </button>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {posts.map((post) => (

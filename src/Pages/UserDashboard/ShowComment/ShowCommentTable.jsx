@@ -4,7 +4,7 @@ import { MdOutlineReportProblem } from "react-icons/md";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 
-const ShowCommentTable = ({ coment }) => {
+const ShowCommentTable = ({ coment, index }) => {
   const axiosSecure = useAxiosSecure();
   const { commentUser, commentEmail, comment } = coment;
   const [selectedFeedback, setSelectedFeedback] = useState("");
@@ -41,7 +41,7 @@ const ShowCommentTable = ({ coment }) => {
   return (
     <>
       <tr>
-        <th>1</th>
+        <th>{index + 1}</th>
         <td>{commentUser}</td>
         <td>{commentEmail}</td>
         <td>{comment}</td>
@@ -80,6 +80,7 @@ const ShowCommentTable = ({ coment }) => {
 
 ShowCommentTable.propTypes = {
   coment: PropTypes.object,
+  index: PropTypes.number,
 };
 
 export default ShowCommentTable;

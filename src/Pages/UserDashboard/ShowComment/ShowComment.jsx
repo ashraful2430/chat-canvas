@@ -42,10 +42,11 @@ const ShowComment = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {comments.map((coment) => (
+                  {comments.map((coment, index) => (
                     <ShowCommentTable
                       key={coment._id}
                       coment={coment}
+                      index={index}
                     ></ShowCommentTable>
                   ))}
                 </tbody>
