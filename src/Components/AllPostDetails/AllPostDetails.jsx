@@ -7,6 +7,7 @@ import SharePost from "./SharePost";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import useCommentCount from "../../Hooks/useCommentCount";
+import { useState } from "react";
 
 const AllPostDetails = () => {
   const axiosSecure = useAxiosSecure();
@@ -25,6 +26,43 @@ const AllPostDetails = () => {
   } = postDetails;
 
   const [comments] = useCommentCount(_id);
+  const [upVoteCount, setUpVoteCount] = useState(upVote);
+  const [downVoteCount, setDownVoteCount] = useState(downVote);
+  const [voted, setVoted] = useState(null);
+
+  const handleUpVote = async () => {
+    if (voted !== "up") {
+      setUpVoteCount(upVoteCount + 1);
+      setVoted("up");
+      const upVoteInfo = {
+        upVote: upVoteCount + 1,
+      };
+      const updateVote = await axiosSecure.patch(
+        `/posts/upvote/${_id}`,
+        upVoteInfo
+      );
+      if (updateVote.data.modifiedCount > 0) {
+        alert("Upvote done");
+      }
+      console.log(updateVote);
+    }
+  };
+
+  const handleDownVote = async () => {
+    if (voted !== "down") {
+      setDownVoteCount(downVoteCount + 1);
+      setVoted("down");
+      const downVoteInfo = { downVote: downVoteCount + 1 };
+      const updateDownVote = await axiosSecure.patch(
+        `/posts/downvote/${_id}`,
+        downVoteInfo
+      );
+      if (updateDownVote.data.modifiedCount > 0) {
+        alert("Downvote successful");
+      }
+      console.log(updateDownVote);
+    }
+  };
 
   const handleSubmitPost = async (e) => {
     e.preventDefault();
@@ -79,13 +117,27 @@ const AllPostDetails = () => {
                   <p className="text-xl">{comments.count}</p>
                 </div>
                 <div className="flex justify-between items-center gap-2 my-5">
-                  <button className="flex items-center gap-3">
+                  {/* up vote */}
+                  <button
+                    onClick={handleUpVote}
+                    className={`flex items-center gap-3 ${
+                      voted === "down" ? "disabled" : ""
+                    }`}
+                    disabled={voted === "down"}
+                  >
                     <AiOutlineLike className="text-2xl text-blue-500 " />
-                    {upVote}
+                    {upVoteCount}
                   </button>
-                  <button className="flex items-center gap-3">
+                  {/* down vote */}
+                  <button
+                    onClick={handleDownVote}
+                    className={`flex items-center gap-3 ${
+                      voted === "up" ? "disabled" : ""
+                    }`}
+                    disabled={voted === "up"}
+                  >
                     <AiOutlineDislike className="text-2xl text-red-500" />
-                    {downVote}
+                    {downVoteCount}
                   </button>
                 </div>
               </div>
