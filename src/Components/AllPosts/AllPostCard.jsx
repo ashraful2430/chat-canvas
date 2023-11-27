@@ -2,8 +2,20 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 const AllPostCard = ({ post }) => {
-  const { title, authorName, authorEmail, tag, details, date, authorImg, _id } =
-    post;
+  const {
+    title,
+    authorName,
+    authorEmail,
+    tag,
+    details,
+    date,
+    authorImg,
+    _id,
+    commentCount,
+    upVote,
+    downVote,
+  } = post;
+
   return (
     <>
       <Link to={`/post-details/${_id}`}>
@@ -30,9 +42,12 @@ const AllPostCard = ({ post }) => {
                 Publish Date: {date.slice(0, 10)}
               </p>
             </div>
-            <div className="flex flex-col lg:flex-row">
-              <p>Total Comments: 0</p>
-              <p>Total Votes:0</p>
+            <div className="">
+              <p> Comments: {commentCount}</p>
+              <div className="flex items-center">
+                <p> up votes :{upVote}</p>
+                <p>down votes :{downVote}</p>
+              </div>
             </div>
           </div>
         </div>

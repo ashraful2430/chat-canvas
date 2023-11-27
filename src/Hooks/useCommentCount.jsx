@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "./useAxiosSecure";
 
 const useCommentCount = (_id) => {
+  console.log("hook", _id);
   const axiosSecure = useAxiosSecure();
   const { data: comments = [] } = useQuery({
     queryKey: ["comments"],

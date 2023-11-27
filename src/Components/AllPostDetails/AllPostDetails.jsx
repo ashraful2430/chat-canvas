@@ -25,7 +25,6 @@ const AllPostDetails = () => {
   } = postDetails;
 
   const [comments] = useCommentCount(_id);
-  console.log(comments);
 
   const handleSubmitPost = async (e) => {
     e.preventDefault();
