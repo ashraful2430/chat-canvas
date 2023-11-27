@@ -10,7 +10,6 @@ const Home = () => {
   const handleSearch = (searchText) => {
     setSearch(searchText);
   };
-  console.log(search);
 
   return (
     <div>

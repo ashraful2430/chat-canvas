@@ -11,6 +11,7 @@ import PrivateRoute from "./PrivateRoute";
 import AddPost from "../../Pages/UserDashboard/AddPost/AddPost";
 import MyPost from "../../Pages/UserDashboard/MyPost/MyPost";
 import ShowComment from "../../Pages/UserDashboard/ShowComment/ShowComment";
+import AllPostDetails from "../../Components/AllPostDetails/AllPostDetails";
 
 const routes = createBrowserRouter([
   {
@@ -26,6 +27,12 @@ const routes = createBrowserRouter([
       {
         path: "/membership",
         element: <Membership></Membership>,
+      },
+      {
+        path: "/post-details/:id",
+        element: <AllPostDetails></AllPostDetails>,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/posts/all/${params.id}`),
       },
     ],
   },
