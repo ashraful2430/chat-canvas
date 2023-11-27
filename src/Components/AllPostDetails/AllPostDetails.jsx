@@ -31,10 +31,10 @@ const AllPostDetails = () => {
   const [upVoteCount, setUpVoteCount] = useState(upVote);
   const [downVoteCount, setDownVoteCount] = useState(downVote);
   const [voted, setVoted] = useState(null);
-
   const handleUpVote = async () => {
     if (voted !== "up") {
       setUpVoteCount(upVoteCount + 1);
+      setDownVoteCount(downVoteCount);
       setVoted("up");
       const upVoteInfo = {
         upVote: upVoteCount + 1,
@@ -44,12 +44,16 @@ const AllPostDetails = () => {
         upVoteInfo
       );
       console.log(updateVote);
+    } else {
+      setUpVoteCount(upVoteCount - 1);
+      setVoted(null);
     }
   };
 
   const handleDownVote = async () => {
     if (voted !== "down") {
       setDownVoteCount(downVoteCount + 1);
+      setUpVoteCount(upVoteCount);
       setVoted("down");
       const downVoteInfo = { downVote: downVoteCount + 1 };
       const updateDownVote = await axiosSecure.patch(
@@ -57,6 +61,9 @@ const AllPostDetails = () => {
         downVoteInfo
       );
       console.log(updateDownVote);
+    } else {
+      setDownVoteCount(downVoteCount - 1);
+      setVoted(null);
     }
   };
 
@@ -118,17 +125,31 @@ const AllPostDetails = () => {
                   {/* up vote */}
                   <button
                     onClick={handleUpVote}
-                    className={`flex items-center gap-3 `}
+                    className={`flex items-center gap-3 ${
+                      voted === "up" ? "opacity-90 " : ""
+                    }`}
+                    disabled={voted === "down"}
                   >
-                    <AiOutlineLike className="text-2xl text-blue-500 " />
+                    <AiOutlineLike
+                      className={`text-2xl text-blue-500 ${
+                        voted === "down" ? "opacity-50 cursor-not-allowed" : ""
+                      }`}
+                    />
                     {upVoteCount}
                   </button>
                   {/* down vote */}
                   <button
                     onClick={handleDownVote}
-                    className={`flex items-center gap-3`}
+                    className={`flex items-center gap-3 ${
+                      voted === "down" ? "opacity-90" : ""
+                    }`}
+                    disabled={voted === "up"}
                   >
-                    <AiOutlineDislike className="text-2xl text-red-500" />
+                    <AiOutlineDislike
+                      className={`text-2xl text-red-500 ${
+                        voted === "up" ? "opacity-50  cursor-not-allowed" : ""
+                      }`}
+                    />
                     {downVoteCount}
                   </button>
                 </div>
