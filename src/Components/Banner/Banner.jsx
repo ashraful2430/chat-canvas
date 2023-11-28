@@ -1,12 +1,17 @@
+import { useState } from "react";
 import Container from "../../Shared/Container/Container";
 
 import PropTypes from "prop-types";
 
 const Banner = ({ onSearch }) => {
+  const [searchText, setSearchText] = useState("");
   const handleSearch = (e) => {
     e.preventDefault();
-    const searchText = e.target.search.value;
     onSearch(searchText);
+    setSearchText("");
+  };
+  const handleInputChange = (e) => {
+    setSearchText(e.target.value);
   };
   return (
     <>
@@ -44,6 +49,8 @@ const Banner = ({ onSearch }) => {
                       type="text"
                       id="hero-field"
                       name="search"
+                      value={searchText}
+                      onChange={handleInputChange}
                       className="w-full bg-gray-100 bg-opacity-50 rounded focus:ring-2 focus:ring-indigo-200 focus:bg-transparent border border-gray-300 focus:border-indigo-500 text-base outline-none text-white py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
                     />
                   </div>

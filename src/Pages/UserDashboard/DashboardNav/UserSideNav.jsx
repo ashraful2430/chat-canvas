@@ -5,7 +5,7 @@ const UserSideNav = () => {
   const [isAdmin] = useAdmin();
   return (
     <div>
-      <div className="flex flex-col gap-2 justify-center items-center z-30">
+      <div className="flex flex-col gap-2 justify-center items-center z-50">
         <div className="flex  justify-evenly w-full   ">
           <div className="flex flex-col items-center  mt-10  gap-5">
             {isAdmin ? (
