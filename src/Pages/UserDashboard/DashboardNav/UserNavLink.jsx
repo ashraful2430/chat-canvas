@@ -2,12 +2,13 @@ import { NavLink } from "react-router-dom";
 import Container from "../../../Shared/Container/Container";
 import logo from "../../../assets/logo.png";
 import useAuth from "../../../Hooks/useAuth";
+import useAdmin from "../../../Hooks/useAdmin";
 
 const UserNavLink = () => {
   const { user } = useAuth();
   const defaultPhoto =
     "https://i.ibb.co/Fhm4brM/Screenshot-2023-11-25-145934.jpg";
-  const isAdmin = true;
+  const [isAdmin] = useAdmin();
   return (
     <>
       <div className="w-full navbar bg-base-100 shadow-xl">

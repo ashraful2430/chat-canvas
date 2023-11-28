@@ -3,6 +3,7 @@ import Container from "../../Shared/Container/Container";
 import logo from "../../assets/logo.png";
 import useAuth from "../../Hooks/useAuth";
 import { IoIosNotifications } from "react-icons/io";
+import useAdmin from "../../Hooks/useAdmin";
 
 const Navlink = () => {
   const { user, logout } = useAuth();
@@ -15,7 +16,7 @@ const Navlink = () => {
         console.error(error);
       });
   };
-  const isAdmin = true;
+  const [isAdmin] = useAdmin();
 
   const defaultPhoto =
     "https://i.ibb.co/Fhm4brM/Screenshot-2023-11-25-145934.jpg";

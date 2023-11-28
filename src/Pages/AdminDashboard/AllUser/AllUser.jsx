@@ -2,16 +2,33 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import Container from "../../../Shared/Container/Container";
 import AllUserTable from "./AllUserTable";
+import Lottie from "lottie-react";
+import commentLoading from "../../../assets/comment-loading.json";
 
 const AllUser = () => {
   const axiosSecure = useAxiosSecure();
-  const { data: users = [], refetch } = useQuery({
+  const {
+    data: users = [],
+    refetch,
+    isPending,
+  } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
       const res = await axiosSecure.get("/users");
       return res.data;
     },
   });
+  if (isPending) {
+    return <p>loadimg</p>;
+  }
+  if (!Array.isArray(users)) {
+    return (
+      <Lottie
+        animationData={commentLoading}
+        className="w-40 flex justify-center items-center mx-auto min-h-screen"
+      ></Lottie>
+    );
+  }
   return (
     <div>
       <Container>

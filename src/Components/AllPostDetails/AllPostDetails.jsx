@@ -32,7 +32,7 @@ const AllPostDetails = () => {
   const [downVoteCount, setDownVoteCount] = useState(downVote);
   const [voted, setVoted] = useState(null);
   const handleUpVote = async () => {
-    if (voted !== "up") {
+    if (voted !== "up" && user) {
       setUpVoteCount(upVoteCount + 1);
       setDownVoteCount(downVoteCount);
       setVoted("up");
@@ -44,14 +44,20 @@ const AllPostDetails = () => {
         upVoteInfo
       );
       console.log(updateVote);
-    } else {
+    } else if (voted === "up") {
       setUpVoteCount(upVoteCount - 1);
       setVoted(null);
+    } else {
+      Swal.fire({
+        title: "Sorry!",
+        text: "You need to login first",
+        icon: "error",
+      });
     }
   };
 
   const handleDownVote = async () => {
-    if (voted !== "down") {
+    if (voted !== "down" && user) {
       setDownVoteCount(downVoteCount + 1);
       setUpVoteCount(upVoteCount);
       setVoted("down");
@@ -61,14 +67,28 @@ const AllPostDetails = () => {
         downVoteInfo
       );
       console.log(updateDownVote);
-    } else {
+    } else if (voted === "down") {
       setDownVoteCount(downVoteCount - 1);
       setVoted(null);
+    } else {
+      Swal.fire({
+        title: "Sorry!",
+        text: "You need to login first",
+        icon: "error",
+      });
     }
   };
 
   const handleSubmitPost = async (e) => {
     e.preventDefault();
+    if (!user) {
+      Swal.fire({
+        title: "Sorry!",
+        text: "You need to login first",
+        icon: "error",
+      });
+      return;
+    }
     const form = e.target;
     const comment = form.comment.value;
     const postId = _id;
