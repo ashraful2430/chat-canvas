@@ -15,6 +15,7 @@ const Navlink = () => {
         console.error(error);
       });
   };
+  const isAdmin = true;
 
   const defaultPhoto =
     "https://i.ibb.co/Fhm4brM/Screenshot-2023-11-25-145934.jpg";
@@ -99,9 +100,17 @@ const Navlink = () => {
                 </button>
               </li>
               <li>
-                <Link to={"/dashboard/My-profile"}>
-                  <p className=" font-medium ml-10">Dashboard</p>
-                </Link>
+                {isAdmin ? (
+                  <>
+                    <Link to={"/dashboard/admin-profile"}>
+                      <p className=" font-medium ml-10">Dashboard</p>
+                    </Link>
+                  </>
+                ) : (
+                  <Link to={"/dashboard/My-profile"}>
+                    <p className=" font-medium ml-10">Dashboard</p>
+                  </Link>
+                )}
               </li>
             </ul>
           </div>

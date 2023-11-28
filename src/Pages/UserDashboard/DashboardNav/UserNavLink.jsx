@@ -7,6 +7,7 @@ const UserNavLink = () => {
   const { user } = useAuth();
   const defaultPhoto =
     "https://i.ibb.co/Fhm4brM/Screenshot-2023-11-25-145934.jpg";
+  const isAdmin = true;
   return (
     <>
       <div className="w-full navbar bg-base-100 shadow-xl">
@@ -37,45 +38,92 @@ const UserNavLink = () => {
           </div>
           <div className="flex-none hidden lg:block ">
             <div className=" flex items-center ml-72 gap-4">
-              <NavLink
-                to={"/"}
-                className={({ isActive }) =>
-                  isActive ? " bg-none text-blue-400 font-bold" : ""
-                }
-              >
-                Home
-              </NavLink>
-              <NavLink
-                to={"/dashboard/My-profile"}
-                className={({ isActive }) =>
-                  isActive ? " bg-none text-blue-400 font-bold" : ""
-                }
-              >
-                My Profile
-              </NavLink>
-              <NavLink
-                to={"/dashboard/add-post"}
-                className={({ isActive }) =>
-                  isActive ? " bg-none text-blue-400 font-bold" : ""
-                }
-              >
-                Add post
-              </NavLink>
-              <NavLink
-                to={"/dashboard/my-post"}
-                className={({ isActive }) =>
-                  isActive ? " bg-none text-blue-400 font-bold" : ""
-                }
-              >
-                My post
-              </NavLink>
-              <div className="lg:ml-72">
-                <img
-                  className="w-14 rounded-full"
-                  src={user.photoURL ? user.photoURL : defaultPhoto}
-                  alt=""
-                />
-              </div>
+              {isAdmin ? (
+                <>
+                  <NavLink
+                    to={"/"}
+                    className={({ isActive }) =>
+                      isActive ? " bg-none text-blue-400 font-bold" : ""
+                    }
+                  >
+                    Home
+                  </NavLink>
+                  <NavLink
+                    to={"/dashboard/admin-profile"}
+                    className={({ isActive }) =>
+                      isActive ? " bg-none text-blue-400 font-bold" : ""
+                    }
+                  >
+                    Admin Profile
+                  </NavLink>
+                  <NavLink
+                    to={"/dashboard/manage-users"}
+                    className={({ isActive }) =>
+                      isActive ? " bg-none text-blue-400 font-bold" : ""
+                    }
+                  >
+                    Manage users
+                  </NavLink>
+                  <NavLink
+                    to={"/dashboard/reported"}
+                    className={({ isActive }) =>
+                      isActive ? " bg-none text-blue-400 font-bold" : ""
+                    }
+                  >
+                    Reported comments
+                  </NavLink>
+                  <NavLink
+                    to={"/dashboard/make-announcement"}
+                    className={({ isActive }) =>
+                      isActive ? " bg-none text-blue-400 font-bold" : ""
+                    }
+                  >
+                    Make Announcement
+                  </NavLink>
+                </>
+              ) : (
+                <>
+                  <NavLink
+                    to={"/"}
+                    className={({ isActive }) =>
+                      isActive ? " bg-none text-blue-400 font-bold" : ""
+                    }
+                  >
+                    Home
+                  </NavLink>
+                  <NavLink
+                    to={"/dashboard/My-profile"}
+                    className={({ isActive }) =>
+                      isActive ? " bg-none text-blue-400 font-bold" : ""
+                    }
+                  >
+                    My Profile
+                  </NavLink>
+                  <NavLink
+                    to={"/dashboard/add-post"}
+                    className={({ isActive }) =>
+                      isActive ? " bg-none text-blue-400 font-bold" : ""
+                    }
+                  >
+                    Add post
+                  </NavLink>
+                  <NavLink
+                    to={"/dashboard/my-post"}
+                    className={({ isActive }) =>
+                      isActive ? " bg-none text-blue-400 font-bold" : ""
+                    }
+                  >
+                    My post
+                  </NavLink>
+                  <div className="lg:ml-72">
+                    <img
+                      className="w-14 rounded-full"
+                      src={user.photoURL ? user.photoURL : defaultPhoto}
+                      alt=""
+                    />
+                  </div>
+                </>
+              )}
             </div>
           </div>
         </Container>

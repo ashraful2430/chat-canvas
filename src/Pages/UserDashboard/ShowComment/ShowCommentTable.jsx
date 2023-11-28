@@ -42,7 +42,7 @@ const ShowCommentTable = ({ coment, index }) => {
 
   return (
     <>
-      <tr>
+      <tr className="hover">
         <th>{index + 1}</th>
         <td>{commentUser}</td>
         <td>{commentEmail}</td>

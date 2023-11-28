@@ -1,13 +1,15 @@
 import { useForm } from "react-hook-form";
 import useAuth from "../../../Hooks/useAuth";
 import Container from "../../../Shared/Container/Container";
-import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 const AddPost = () => {
   const { user } = useAuth();
+  const axiosSecure = useAxiosSecure();
   const axiosPublic = useAxiosPublic();
   const upVote = 0;
   const downVote = 0;
@@ -39,7 +41,7 @@ const AddPost = () => {
         authorImg: res.data.data.display_url,
         date: new Date(),
       };
-      const addedPost = await axiosPublic.post("/posts", postInfo);
+      const addedPost = await axiosSecure.post("/posts", postInfo);
       console.log(addedPost);
       if (addedPost.data.insertedId) {
         reset();

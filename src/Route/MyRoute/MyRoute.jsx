@@ -12,6 +12,8 @@ import AddPost from "../../Pages/UserDashboard/AddPost/AddPost";
 import MyPost from "../../Pages/UserDashboard/MyPost/MyPost";
 import ShowComment from "../../Pages/UserDashboard/ShowComment/ShowComment";
 import AllPostDetails from "../../Components/AllPostDetails/AllPostDetails";
+import AllUser from "../../Pages/AdminDashboard/AllUser/AllUser";
+import AdminProfile from "../../Pages/AdminDashboard/AdminProfile/AdminProfile";
 
 const routes = createBrowserRouter([
   {
@@ -47,12 +49,12 @@ const routes = createBrowserRouter([
   {
     path: "dashboard",
     element: (
-      // user routes
       <PrivateRoute>
         <Dashboard></Dashboard>
       </PrivateRoute>
     ),
     children: [
+      // user routes
       {
         path: "My-Profile",
         element: (
@@ -86,6 +88,15 @@ const routes = createBrowserRouter([
         ),
         loader: ({ params }) =>
           fetch(`http://localhost:5000/posts/all/${params.id}`),
+      },
+      // admin routes
+      {
+        path: "manage-users",
+        element: <AllUser></AllUser>,
+      },
+      {
+        path: "admin-profile",
+        element: <AdminProfile></AdminProfile>,
       },
     ],
   },
