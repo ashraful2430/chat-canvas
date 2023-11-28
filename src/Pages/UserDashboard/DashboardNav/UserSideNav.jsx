@@ -3,7 +3,6 @@ import useAdmin from "../../../Hooks/useAdmin";
 
 const UserSideNav = () => {
   const [isAdmin] = useAdmin();
-  console.log(isAdmin);
   return (
     <div>
       <div className="flex flex-col gap-2 justify-center items-center z-30">

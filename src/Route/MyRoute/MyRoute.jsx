@@ -14,6 +14,7 @@ import ShowComment from "../../Pages/UserDashboard/ShowComment/ShowComment";
 import AllPostDetails from "../../Components/AllPostDetails/AllPostDetails";
 import AllUser from "../../Pages/AdminDashboard/AllUser/AllUser";
 import AdminProfile from "../../Pages/AdminDashboard/AdminProfile/AdminProfile";
+import AdminRoute from "./AdminRoute";
 
 const routes = createBrowserRouter([
   {
@@ -92,11 +93,19 @@ const routes = createBrowserRouter([
       // admin routes
       {
         path: "manage-users",
-        element: <AllUser></AllUser>,
+        element: (
+          <AdminRoute>
+            <AllUser></AllUser>
+          </AdminRoute>
+        ),
       },
       {
         path: "admin-profile",
-        element: <AdminProfile></AdminProfile>,
+        element: (
+          <AdminRoute>
+            <AdminProfile></AdminProfile>
+          </AdminRoute>
+        ),
       },
     ],
   },
