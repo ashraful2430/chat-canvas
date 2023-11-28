@@ -1,5 +1,13 @@
+import Container from "../../Shared/Container/Container";
+
 const Membership = () => {
-  return <div>this is membership route</div>;
+  return (
+    <>
+      <Container>
+        <div></div>
+      </Container>
+    </>
+  );
 };
 
 export default Membership;

@@ -75,11 +75,19 @@ const MyProfile = () => {
             <h3 className="text-center text-4xl font-medium mb-10">
               My recent three posts
             </h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {threeData.map((post) => (
-                <ShowRecentPost key={post._id} post={post}></ShowRecentPost>
-              ))}
-            </div>
+            {threeData.length === 0 ? (
+              <>
+                <div className="text-center mt-10 font-medium text-3xl">
+                  You have not Posted yet{" "}
+                </div>
+              </>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {threeData.map((post) => (
+                  <ShowRecentPost key={post._id} post={post}></ShowRecentPost>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </Container>

@@ -20,7 +20,7 @@ const Navlink = () => {
         console.error(error);
       });
   };
-  const { data: isAdmin } = useQuery({
+  const { data: isAdmin = [] } = useQuery({
     queryKey: ["isAdmin", user?.email],
     queryFn: async () => {
       const res = await axiosPublic.get(`/users/${user?.email}`);
@@ -113,11 +113,9 @@ const Navlink = () => {
               </li>
               <li>
                 {isAdmin === "admin" ? (
-                  <>
-                    <Link to={"/dashboard/admin-profile"}>
-                      <p className=" font-medium ml-10">Dashboard</p>
-                    </Link>
-                  </>
+                  <Link to={"/dashboard/admin-profile"}>
+                    <p className=" font-medium ml-10">Dashboard</p>
+                  </Link>
                 ) : (
                   <Link to={"/dashboard/My-profile"}>
                     <p className=" font-medium ml-10">Dashboard</p>

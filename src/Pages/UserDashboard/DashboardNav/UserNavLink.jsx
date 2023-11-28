@@ -6,9 +6,12 @@ import useAdmin from "../../../Hooks/useAdmin";
 
 const UserNavLink = () => {
   const { user } = useAuth();
+  const [isAdmin, isAdminLoading] = useAdmin();
+  if (isAdminLoading) {
+    return <p>loading</p>;
+  }
   const defaultPhoto =
     "https://i.ibb.co/Fhm4brM/Screenshot-2023-11-25-145934.jpg";
-  const [isAdmin] = useAdmin();
   return (
     <>
       <div className="w-full navbar bg-base-100 shadow-xl">
