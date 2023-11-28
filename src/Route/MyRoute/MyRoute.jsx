@@ -15,6 +15,7 @@ import AllPostDetails from "../../Components/AllPostDetails/AllPostDetails";
 import AllUser from "../../Pages/AdminDashboard/AllUser/AllUser";
 import AdminProfile from "../../Pages/AdminDashboard/AdminProfile/AdminProfile";
 import AdminRoute from "./AdminRoute";
+import MakeAnnouncement from "../../Pages/AdminDashboard/MakeAnnouncement/MakeAnnouncement";
 
 const routes = createBrowserRouter([
   {
@@ -104,6 +105,14 @@ const routes = createBrowserRouter([
         element: (
           <AdminRoute>
             <AdminProfile></AdminProfile>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "make-announcement",
+        element: (
+          <AdminRoute>
+            <MakeAnnouncement></MakeAnnouncement>
           </AdminRoute>
         ),
       },

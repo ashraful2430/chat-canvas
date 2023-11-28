@@ -1,9 +1,11 @@
 import { NavLink } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import { IoIosNotifications } from "react-icons/io";
+import useAnnouncement from "../../Hooks/useAnnouncement";
 
 const Sidebar = () => {
   const { user, logout } = useAuth();
+  const [announcement] = useAnnouncement();
 
   const handleLogOut = () => {
     logout()
@@ -35,7 +37,9 @@ const Sidebar = () => {
         </NavLink>
         <NavLink>
           <div className="indicator">
-            <span className="indicator-item badge badge-secondary">0</span>
+            <span className="indicator-item badge badge-secondary">
+              {announcement?.length}
+            </span>
             <button className="">
               <IoIosNotifications className="text-xl mt-1" />
             </button>

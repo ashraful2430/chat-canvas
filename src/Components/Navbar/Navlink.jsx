@@ -4,9 +4,11 @@ import logo from "../../assets/logo.png";
 import useAuth from "../../Hooks/useAuth";
 import { IoIosNotifications } from "react-icons/io";
 import useAdmin from "../../Hooks/useAdmin";
+import useAnnouncement from "../../Hooks/useAnnouncement";
 
 const Navlink = () => {
   const { user, logout } = useAuth();
+  const [announcement] = useAnnouncement();
   const handleLogOut = () => {
     logout()
       .then((result) => {
@@ -70,7 +72,9 @@ const Navlink = () => {
             </NavLink>
             <NavLink>
               <div className="indicator">
-                <span className="indicator-item badge badge-secondary">0</span>
+                <span className="indicator-item badge badge-secondary">
+                  {announcement?.length}
+                </span>
                 <button className="">
                   <IoIosNotifications className="text-xl mt-1" />
                 </button>

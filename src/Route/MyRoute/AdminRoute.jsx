@@ -7,7 +7,11 @@ const AdminRoute = ({ children }) => {
   const { user, loading } = useAuth();
   const [isAdmin, isAdminLoading] = useAdmin();
   if (loading || isAdminLoading) {
-    return <p>loading ....</p>;
+    return (
+      <p className="min-h-screen flex justify-center items-center text-4xl font-bold">
+        loading ....
+      </p>
+    );
   }
 
   if (user && isAdmin) {
