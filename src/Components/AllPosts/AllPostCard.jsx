@@ -23,7 +23,7 @@ const AllPostCard = ({ post }) => {
           <div className="card-body">
             <h2 className="card-title">{title}</h2>
             <p>{details}</p>
-            <p className=" mt-5 ">Tag: #{tag}</p>
+            <p className=" mt-5 badge badge-info ">Tag: #{tag}</p>
             <div className="mt-4 flex items-center gap-4">
               <div>
                 <img

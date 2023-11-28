@@ -14,6 +14,9 @@ const ShowComment = () => {
   return (
     <div>
       <Container>
+        <div className="text-center mt-10 font-bold text-2xl">
+          Your Post comments
+        </div>
         {comments.length === 0 ? (
           <>
             <div className="min-h-[50vh] flex flex-col justify-center items-center  w-full">

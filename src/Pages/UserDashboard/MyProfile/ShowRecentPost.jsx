@@ -1,8 +1,17 @@
 import PropTypes from "prop-types";
 
 const ShowRecentPost = ({ post }) => {
-  const { title, authorName, authorEmail, tag, details, date, authorImg } =
-    post;
+  const {
+    title,
+    authorName,
+    authorEmail,
+    tag,
+    details,
+    date,
+    authorImg,
+    upVote,
+    downVote,
+  } = post;
   return (
     <>
       <div className="card  bg-base-100 shadow-xl hover:shadow-2xl mt-10">
@@ -27,8 +36,8 @@ const ShowRecentPost = ({ post }) => {
             </p>
           </div>
           <div className="flex flex-col lg:flex-row">
-            <p>Total Comments: 0</p>
-            <p>Total Votes:0</p>
+            <p>Total Up votes: {upVote}</p>
+            <p>Total Votes:{downVote}</p>
           </div>
         </div>
       </div>

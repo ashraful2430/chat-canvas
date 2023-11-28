@@ -9,6 +9,8 @@ const ShowCommentTable = ({ coment, index }) => {
   const { commentUser, commentEmail, comment } = coment;
   const [selectedFeedback, setSelectedFeedback] = useState("");
   const [isReportButtonActive, setIsReportButtonActive] = useState(false);
+  const slicedComment =
+    comment.length > 20 ? `${comment.slice(0, 20)}...` : comment;
 
   const handleFeedbackSelect = (event) => {
     const feedbackValue = event.target.value;
@@ -44,7 +46,19 @@ const ShowCommentTable = ({ coment, index }) => {
         <th>{index + 1}</th>
         <td>{commentUser}</td>
         <td>{commentEmail}</td>
-        <td>{comment}</td>
+        <td>
+          {slicedComment}{" "}
+          {comment.length > 20 && (
+            <span
+              className="text-blue-500 cursor-pointer"
+              onClick={() =>
+                document.getElementById(`commentModal_${index}`).showModal()
+              }
+            >
+              Read More
+            </span>
+          )}
+        </td>
         <td>
           <select
             name="feedback"
@@ -74,6 +88,24 @@ const ShowCommentTable = ({ coment, index }) => {
           </button>
         </td>
       </tr>
+      {/* Open the modal using document.getElementById('ID').showModal() method */}
+
+      <dialog id={`commentModal_${index}`} className="modal">
+        <div className="modal-box">
+          <h3 className="font-bold text-lg">Comment</h3>
+          <p className="py-4">{comment}</p>
+          <div className="modal-action">
+            <button
+              className="btn"
+              onClick={() =>
+                document.getElementById(`commentModal_${index}`).close()
+              }
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </dialog>
     </>
   );
 };
