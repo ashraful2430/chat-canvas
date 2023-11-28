@@ -2,6 +2,8 @@ import { Link, useLoaderData } from "react-router-dom";
 import Container from "../../../Shared/Container/Container";
 import useIndividualComment from "../../../Hooks/useIndividualComment";
 import ShowCommentTable from "./ShowCommentTable";
+import commentLoading from "../../../assets/comment-loading.json";
+import Lottie from "lottie-react";
 
 const ShowComment = () => {
   const posts = useLoaderData();
@@ -9,7 +11,20 @@ const ShowComment = () => {
   const [comments, isPending] = useIndividualComment(_id);
   console.log(comments);
   if (isPending) {
-    return <p>loading</p>;
+    return (
+      <Lottie
+        animationData={commentLoading}
+        className="w-40 flex justify-center items-center mx-auto min-h-screen"
+      ></Lottie>
+    );
+  }
+  if (!Array.isArray(comments)) {
+    return (
+      <Lottie
+        animationData={commentLoading}
+        className="w-40 flex justify-center items-center mx-auto min-h-screen"
+      ></Lottie>
+    );
   }
   return (
     <div>
