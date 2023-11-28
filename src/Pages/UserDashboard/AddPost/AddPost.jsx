@@ -6,6 +6,7 @@ import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import { useEffect, useState } from "react";
 import usePostCount from "../../../Hooks/usePostCount";
+import { useNavigate } from "react-router-dom";
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
@@ -14,6 +15,7 @@ const AddPost = () => {
   const axiosSecure = useAxiosSecure();
   const axiosPublic = useAxiosPublic();
   const [limit, setLimit] = useState([]);
+  const navigate = useNavigate();
   useEffect(() => {
     axiosPublic.get(`/users/${user?.email}`).then((res) => {
       setLimit(res.data);
@@ -79,6 +81,7 @@ const AddPost = () => {
         title: "Oops...",
         text: "You have to become a premium member to post more than 5 times!",
       });
+      navigate("/membership");
     }
   };
   return (
