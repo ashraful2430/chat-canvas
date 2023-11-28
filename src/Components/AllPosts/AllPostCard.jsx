@@ -19,11 +19,11 @@ const AllPostCard = ({ post }) => {
   return (
     <>
       <Link to={`/post-details/${_id}`}>
-        <div className="card  bg-base-100 shadow-xl hover:shadow-2xl mt-10">
+        <div className="card h-full  bg-base-100 shadow-xl hover:shadow-2xl mt-10">
           <div className="card-body">
             <h2 className="card-title">{title}</h2>
             <p>{details}</p>
-            <p className=" mt-5 badge badge-info ">Tag: #{tag}</p>
+            <p className=" mt-5  ">Tag: #{tag}</p>
             <div className="mt-4 flex items-center gap-4">
               <div>
                 <img

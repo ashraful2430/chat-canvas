@@ -65,7 +65,7 @@ const AllPosts = ({ count, search }) => {
               <AllPostCard key={post._id} post={post}></AllPostCard>
             ))}
           </div>
-          <div className="text-center mt-6 ">
+          <div className="text-center mt-20 ">
             <button
               onClick={handlePrevPage}
               className="btn btn-square bg-blue-500 text-white"

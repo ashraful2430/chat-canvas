@@ -65,6 +65,7 @@ const ShowComment = () => {
                       key={coment._id}
                       coment={coment}
                       index={index}
+                      posts={posts}
                     ></ShowCommentTable>
                   ))}
                 </tbody>

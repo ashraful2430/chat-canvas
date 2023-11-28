@@ -3,6 +3,7 @@ import AllPosts from "../AllPosts/AllPosts";
 import AllTags from "../AllTags/AllTags";
 import Banner from "../Banner/Banner";
 import { useState } from "react";
+import ShowAnnouncement from "../ShowAnnouncement/ShowAnnouncement";
 
 const Home = () => {
   const { count } = useLoaderData();
@@ -16,6 +17,7 @@ const Home = () => {
       <Banner onSearch={handleSearch}></Banner>
       <AllTags></AllTags>
       <AllPosts count={count} search={search}></AllPosts>
+      <ShowAnnouncement></ShowAnnouncement>
     </div>
   );
 };

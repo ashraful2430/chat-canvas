@@ -1,13 +1,13 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
-import { MdOutlineReportProblem } from "react-icons/md";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import { MdOutlineReportProblem } from "react-icons/md";
 
-const ShowCommentTable = ({ coment, index, posts }) => {
+const ReportTable = ({ repo, index }) => {
   const axiosSecure = useAxiosSecure();
-  const { commentUser, commentEmail, comment } = coment;
-  const [selectedFeedback, setSelectedFeedback] = useState("");
+  const { commentUser, commentEmail, comment, title, selectedFeedback } = repo;
+  const [selectedFeedbackes, setSelectedFeedback] = useState("");
   const [isReportButtonActive, setIsReportButtonActive] = useState(false);
   const slicedComment =
     comment.length > 20 ? `${comment.slice(0, 20)}...` : comment;
@@ -17,15 +17,15 @@ const ShowCommentTable = ({ coment, index, posts }) => {
     setSelectedFeedback(feedbackValue);
     setIsReportButtonActive(!!feedbackValue);
   };
+
   const handleSubmitReport = async () => {
     const reportInfo = {
-      selectedFeedback,
+      selectedFeedback: selectedFeedbackes,
       commentEmail,
       commentUser,
       comment,
-      title: posts.title,
     };
-    const submitReport = await axiosSecure.post("/report", reportInfo);
+    const submitReport = await axiosSecure.post("/admin-report", reportInfo);
     if (submitReport.data.insertedId) {
       Swal.fire({
         position: "top-end",
@@ -38,13 +38,12 @@ const ShowCommentTable = ({ coment, index, posts }) => {
     setSelectedFeedback("");
     setIsReportButtonActive(false);
   };
-
   return (
     <>
       <tr className="hover">
         <th>{index + 1}</th>
         <td>{commentUser}</td>
-        <td>{commentEmail}</td>
+        <td>{title}</td>
         <td>
           {slicedComment}{" "}
           {comment.length > 20 && (
@@ -58,21 +57,24 @@ const ShowCommentTable = ({ coment, index, posts }) => {
             </span>
           )}
         </td>
+        <td>{selectedFeedback}</td>
         <td>
           <select
             name="feedback"
             id="feedback"
-            value={selectedFeedback}
+            value={selectedFeedbackes}
             onChange={handleFeedbackSelect}
           >
             <option disabled value="">
-              Select feedBack
+              Select Actions
             </option>
-            <option value="Keep It Positive">Keep It Positive</option>
-            <option value="Thanks for your lovely feedback">
-              Thanks for your lovely feedback
+            <option value="You have been warn">You have been warn</option>
+            <option value="You have been blocked for 1 month">
+              You have been blocked for 1 month
             </option>
-            <option value="Great contribution">Great contribution</option>
+            <option value="You have been removed from this website">
+              You have been removed from this website
+            </option>
           </select>
         </td>
         <td>
@@ -87,6 +89,7 @@ const ShowCommentTable = ({ coment, index, posts }) => {
           </button>
         </td>
       </tr>
+
       {/* Open the modal using document.getElementById('ID').showModal() method */}
 
       <dialog id={`commentModal_${index}`} className="modal">
@@ -109,10 +112,9 @@ const ShowCommentTable = ({ coment, index, posts }) => {
   );
 };
 
-ShowCommentTable.propTypes = {
-  coment: PropTypes.object,
+ReportTable.propTypes = {
+  repo: PropTypes.object,
   index: PropTypes.number,
-  posts: PropTypes.object,
 };
 
-export default ShowCommentTable;
+export default ReportTable;
