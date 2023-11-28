@@ -3,12 +3,14 @@ import Container from "../../Shared/Container/Container";
 import logo from "../../assets/logo.png";
 import useAuth from "../../Hooks/useAuth";
 import { IoIosNotifications } from "react-icons/io";
-import useAdmin from "../../Hooks/useAdmin";
 import useAnnouncement from "../../Hooks/useAnnouncement";
+import { useQuery } from "@tanstack/react-query";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
 
 const Navlink = () => {
   const { user, logout } = useAuth();
   const [announcement] = useAnnouncement();
+  const axiosPublic = useAxiosPublic();
   const handleLogOut = () => {
     logout()
       .then((result) => {
@@ -18,8 +20,13 @@ const Navlink = () => {
         console.error(error);
       });
   };
-  const [isAdmin] = useAdmin();
-
+  const { data: isAdmin } = useQuery({
+    queryKey: ["isAdmin", user?.email],
+    queryFn: async () => {
+      const res = await axiosPublic.get(`/users/${user?.email}`);
+      return res.data;
+    },
+  });
   const defaultPhoto =
     "https://i.ibb.co/Fhm4brM/Screenshot-2023-11-25-145934.jpg";
   return (
@@ -105,7 +112,7 @@ const Navlink = () => {
                 </button>
               </li>
               <li>
-                {isAdmin ? (
+                {isAdmin === "admin" ? (
                   <>
                     <Link to={"/dashboard/admin-profile"}>
                       <p className=" font-medium ml-10">Dashboard</p>
