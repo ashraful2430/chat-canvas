@@ -4,20 +4,30 @@ import Container from "../../../Shared/Container/Container";
 import AllUserTable from "./AllUserTable";
 import Lottie from "lottie-react";
 import commentLoading from "../../../assets/comment-loading.json";
+import { useState } from "react";
 
 const AllUser = () => {
   const axiosSecure = useAxiosSecure();
+  const [searchText, setSearchText] = useState("");
   const {
     data: users = [],
     refetch,
     isPending,
   } = useQuery({
-    queryKey: ["users"],
+    queryKey: ["users", searchText],
     queryFn: async () => {
-      const res = await axiosSecure.get("/users");
+      const res = await axiosSecure.get(`/users?search=${searchText}`);
       return res.data;
     },
   });
+
+  const handleSearch = async (e) => {
+    e.preventDefault();
+    const search = e.target.search.value;
+    setSearchText(search);
+    const response = await axiosSecure.get(`/users?search=${searchText}`);
+    console.log(response);
+  };
   if (isPending) {
     return <p>loadimg</p>;
   }
@@ -34,7 +44,7 @@ const AllUser = () => {
       <Container>
         <h3 className="text-center text-3xl font-medium mt-5">All users</h3>
         <h3 className="text-2xl mt-4">Total Users: {users.length}</h3>
-        <form>
+        <form onSubmit={handleSearch}>
           <div className="flex w-full justify-center items-end mb-6">
             <div className="relative mr-4 lg:w-full xl:w-1/2 w-2/4 md:w-full text-left">
               <label htmlFor="hero-field" className="leading-7 text-sm">
