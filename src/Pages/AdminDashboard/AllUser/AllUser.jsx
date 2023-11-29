@@ -25,7 +25,7 @@ const AllUser = () => {
     e.preventDefault();
     const search = e.target.search.value;
     setSearchText(search);
-    const response = await axiosSecure.get(`/users?search=${searchText}`);
+    const response = await axiosSecure.get(`/users?search=${search}`);
     console.log(response);
   };
   if (isPending) {
