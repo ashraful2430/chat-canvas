@@ -1,12 +1,38 @@
+import { useState } from "react";
 import useReportComments from "../../../Hooks/useReportComments";
 import Container from "../../../Shared/Container/Container";
 import ReportTable from "./ReportTable";
+import { useLoaderData } from "react-router-dom";
 
 const ReportedComment = () => {
-  const [report, isPending] = useReportComments();
+  const { count } = useLoaderData();
+  const [itemPerPage, setItemPerPage] = useState(10);
+  const [currentPage, setCurrentPage] = useState(0);
+  const totalPage = Math.ceil(count / itemPerPage);
+  const pages = [...Array(totalPage).keys()];
+  const [report, isPending] = useReportComments(currentPage, itemPerPage);
   if (isPending) {
     return <p>loading</p>;
   }
+
+  const handleItemPerPage = (e) => {
+    const value = parseInt(e.target.value);
+    setItemPerPage(value);
+    setCurrentPage(0);
+  };
+
+  const handlePrevPage = () => {
+    if (currentPage > 0) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  const handleNextPage = () => {
+    if (currentPage < pages.length - 1) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
   console.log(report);
   return (
     <>
@@ -38,6 +64,42 @@ const ReportedComment = () => {
               ))}
             </tbody>
           </table>
+          <div className="text-center mt-20 ">
+            <button
+              onClick={handlePrevPage}
+              className="btn btn-square bg-blue-500 text-white"
+            >
+              Prev
+            </button>
+            {pages.map((page, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentPage(page)}
+                className={`btn btn-square ml-2 text-white ${
+                  currentPage === page ? "bg-purple-500" : "bg-blue-500"
+                }`}
+              >
+                {page}
+              </button>
+            ))}
+            <button
+              onClick={handleNextPage}
+              className="btn btn-square ml-2 bg-blue-500 text-white"
+            >
+              Next
+            </button>
+            <select
+              className="ml-4 border-2 py-3 px-1 rounded-lg"
+              defaultValue={itemPerPage}
+              onChange={handleItemPerPage}
+              name=""
+              id=""
+            >
+              <option value="3">3</option>
+              <option value="5">5</option>
+              <option value="10">10</option>
+            </select>
+          </div>
         </div>
       </Container>
     </>

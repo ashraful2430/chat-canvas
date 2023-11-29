@@ -1,12 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "./useAxiosSecure";
 
-const useReportComments = () => {
+const useReportComments = (currentPage, itemPerPage) => {
   const axiosSecure = useAxiosSecure();
   const { data: report = [], isPending } = useQuery({
-    queryKey: ["report"],
+    queryKey: ["report", currentPage, itemPerPage],
     queryFn: async () => {
-      const res = await axiosSecure.get("/report");
+      const res = await axiosSecure.get(
+        `/report?page=${currentPage}&size=${itemPerPage}`
+      );
       return res.data;
     },
   });

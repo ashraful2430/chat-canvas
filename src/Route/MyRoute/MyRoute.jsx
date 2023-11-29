@@ -101,6 +101,7 @@ const routes = createBrowserRouter([
             <AllUser></AllUser>
           </AdminRoute>
         ),
+        loader: () => fetch("http://localhost:5000/users-count"),
       },
       {
         path: "admin-profile",
@@ -125,6 +126,7 @@ const routes = createBrowserRouter([
             <ReportedComment></ReportedComment>
           </AdminRoute>
         ),
+        loader: () => fetch("http://localhost:5000/report-count"),
       },
     ],
   },
