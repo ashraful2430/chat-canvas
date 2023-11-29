@@ -41,11 +41,11 @@ const AllUserTable = ({ user, index, refetch }) => {
         <td>
           {badge === "Gold" ? (
             <>
-              <p>Premium User</p>
+              <p>Premium member</p>
             </>
           ) : (
             <>
-              <p>Normal User</p>
+              <p>Normal member</p>
             </>
           )}
         </td>
