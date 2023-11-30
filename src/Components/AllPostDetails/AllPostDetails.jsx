@@ -188,7 +188,7 @@ const AllPostDetails = () => {
                 </div>
               </div>
               <div>
-                <SharePost></SharePost>
+                <SharePost _id={_id}></SharePost>
               </div>
               <div>
                 <form onSubmit={handleSubmitPost}>

@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import {
   FacebookShareButton,
   FacebookIcon,
@@ -9,8 +10,8 @@ import {
 import useAuth from "../../Hooks/useAuth";
 import Swal from "sweetalert2";
 
-const SharePost = () => {
-  const shareUrl = "https://www.facebook.com/watch/?ref=tab";
+const SharePost = ({ _id }) => {
+  const shareUrl = `https://chat-canvas-725c3.web.app/post-details/${_id}`;
   const { user } = useAuth();
   const isLoggedIn = !!user;
   const handleShowAlert = () => {
@@ -81,6 +82,10 @@ const SharePost = () => {
       )}
     </>
   );
+};
+
+SharePost.propTypes = {
+  _id: PropTypes.string,
 };
 
 export default SharePost;
