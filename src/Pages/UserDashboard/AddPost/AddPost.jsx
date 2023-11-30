@@ -21,8 +21,7 @@ const AddPost = () => {
       setLimit(res.data);
     });
   }, [axiosPublic, user?.email]);
-  const { postCount, isPending } = usePostCount();
-  console.log(postCount, limit.badge);
+  const { postCount, isPending, refetch } = usePostCount();
 
   const upVote = 0;
   const downVote = 0;
@@ -37,12 +36,10 @@ const AddPost = () => {
   if (isPending) {
     return <p>loading</p>;
   }
+
   const onSubmit = async (data) => {
-    // Check the conditions before allowing the post
-    if (
-      (limit.badge === "Bronze" && postCount >= 5) ||
-      limit.badge === "Gold"
-    ) {
+    if (limit.badge === "Bronze" && postCount.postCount < 5) {
+      console.log(postCount.postCount);
       const imageFile = { image: data.authorImg[0] };
       const res = await axiosPublic.post(image_hosting_api, imageFile, {
         headers: {
@@ -72,18 +69,52 @@ const AddPost = () => {
             showConfirmButton: false,
             timer: 2000,
           });
+          refetch();
+        }
+      }
+    } else if (limit.badge === "Gold") {
+      const imageFile = { image: data.authorImg[0] };
+      const res = await axiosPublic.post(image_hosting_api, imageFile, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      if (res.data.success) {
+        const postInfo = {
+          authorName: data.authorName,
+          authorEmail: data.authorEmail,
+          tag: data.tag,
+          details: data.details,
+          title: data.title,
+          upVote,
+          downVote,
+          authorImg: res.data.data.display_url,
+          date: new Date(),
+        };
+        const addedPost = await axiosSecure.post("/posts", postInfo);
+        console.log(addedPost);
+        if (addedPost.data.insertedId) {
+          reset();
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Your post has been added successfully",
+            showConfirmButton: false,
+            timer: 2000,
+          });
+          refetch();
         }
       }
     } else {
-      // Display a message or prevent the submission
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: "You have to become a premium member to post more than 5 times!",
+        text: "You have reached the maximum post limit for Bronze users!",
       });
       navigate("/membership");
     }
   };
+
   return (
     <>
       {limit.badge === "Bronze" && postCount >= 5 ? (

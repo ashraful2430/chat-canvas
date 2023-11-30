@@ -5,14 +5,18 @@ import { useQuery } from "@tanstack/react-query";
 const usePostCount = () => {
   const axiosPublic = useAxiosPublic();
   const { user } = useAuth();
-  const { data: postCount = {}, isPending } = useQuery({
+  const {
+    data: postCount = {},
+    isPending,
+    refetch,
+  } = useQuery({
     queryKey: ["count", user?.email],
     queryFn: async () => {
       const res = await axiosPublic.get(`/count/${user?.email}`);
       return res.data;
     },
   });
-  return { postCount, isPending };
+  return { postCount, isPending, refetch };
 };
 
 export default usePostCount;
