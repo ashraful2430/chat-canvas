@@ -127,7 +127,7 @@ const MakeAnnouncement = () => {
                   className="textarea textarea-bordered h-32"
                   name="details"
                   {...register("details", { required: true })}
-                  placeholder="Post Details"
+                  placeholder="Announcement Details"
                 ></textarea>
                 {errors.details && (
                   <span className="text-red-500">Detail is required</span>

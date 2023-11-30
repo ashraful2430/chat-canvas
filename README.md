@@ -1,5 +1,7 @@
 - Welcome to my Github
 
+- Live link -
+
   - Here are some features about this website
   - User features :-
 
@@ -18,6 +20,6 @@
   - Admin features :-
     - An admin can make other user admin
     - An admin can make announcement
-    - An admin can how many users , post and comments are made
+    - An admin can see how many users , post and comments are made
     - An admin can see all the reported comments and take actions against them
     - An admin can search the logged in user from the manage user section
