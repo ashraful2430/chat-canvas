@@ -2,7 +2,7 @@
 
 ## Overview
 
-Welcome to the Forum Website – a platform for engaging discussions and interactions. This web application is built with React, Tailwind CSS, Daisy UI, MongoDB, Node.js, and Express.js. It provides users with a seamless experience for creating and participating in discussions on various topics.
+Welcome to the Forum Website – a platform for engaging discussions and interactions. This web application is built with React, Tailwind CSS, Daisy UI, MongoDB, Node.js, Express.js and user firebase for authentication. It provides users with a seamless experience for creating and participating in discussions on various topics.
 
 ## Live Link
 
