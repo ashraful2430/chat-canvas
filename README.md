@@ -70,6 +70,10 @@ Go see my work from here [Chat Canvas](https://chat-canvas-725c3.web.app)
    - Admins can review and take action against reported comments, ensuring a safe and respectful environment.
 
 4. **Announcements:**
+
    - Make announcements to communicate important information to the entire community.
+
+5. **Make Admin:**
+   - A admin can make other user admin if he want.
 
 ---
