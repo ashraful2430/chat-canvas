@@ -76,6 +76,12 @@ const AllPostDetails = () => {
       console.log(updateDownVote);
     } else if (voted === "down") {
       setDownVoteCount(downVoteCount - 1);
+      const decreaseInfoDownVote = { downVote: downVoteCount - 1 };
+      const decreaseDownVote = await axiosSecure.patch(
+        `/posts/downvote-down/${_id}`,
+        decreaseInfoDownVote
+      );
+      console.log(decreaseDownVote);
       setVoted(null);
     } else {
       Swal.fire({
