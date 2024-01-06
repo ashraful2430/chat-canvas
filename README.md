@@ -54,6 +54,10 @@ Go see my work from here [Chat Canvas](https://chat-canvas-725c3.web.app)
 
 - Users can view all popular posts based on like and dislike counts.
 
+11. **Up Vote and Down Vote:**
+
+- Users can give up vote and down vote to any of the post and the he can upvote or down vote at a time.
+
 ### For Admins:
 
 1. **Dashboard:**
