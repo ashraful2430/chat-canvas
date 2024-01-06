@@ -97,15 +97,17 @@ const AllPostDetails = () => {
       return;
     }
     const form = e.target;
-    const comment = form.comment.value.trim(); // Trim the comment to check for empty string
-    if (!comment) {
+    const comment = form.comment.value.trim();
+
+    if (!comment || comment.length < 5) {
       Swal.fire({
         title: "Oops!",
-        text: "Please enter a non-empty comment",
+        text: "Please enter a comment with at least 5 characters",
         icon: "error",
       });
       return;
     }
+
     const postId = _id;
     const commentInfo = {
       comment,
