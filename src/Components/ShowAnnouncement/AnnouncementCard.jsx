@@ -33,7 +33,7 @@ const AnnouncementCard = ({ ann, refetch }) => {
   };
   return (
     <div>
-      <div className="card h-full  bg-base-100 shadow-xl">
+      <div className="card h-full  bg-base-100 shadow-xl z-0">
         <div className="card-body">
           <h2 className="card-title">{title}</h2>
           <p>{details}</p>

@@ -17,8 +17,8 @@ const Sidebar = () => {
       });
   };
   return (
-    <div>
-      <div className="flex flex-col gap-2 justify-center items-center z-50">
+    <div className="z-30">
+      <div className="flex flex-col gap-2 justify-center items-center ">
         <NavLink
           to={"/"}
           className={({ isActive }) =>
