@@ -216,12 +216,23 @@ const AllPostDetails = () => {
                     ></textarea>
                   </div>
                   <div>
-                    <button className="btn btn-outline mt-3">Post</button>
+                    <button className="btn btn-outline mt-3 w-full">
+                      Post
+                    </button>
                   </div>
                 </form>
               </div>
-              <div>
-                <button className="btn btn-error">Delete</button>
+              <div className="">
+                {user?.email === authorEmail ? (
+                  <button className="group relative inline-block text-sm font-medium w-full  text-white focus:outline-none focus:ring">
+                    <span className="absolute inset-0 border border-red-600 group-active:border-red-500"></span>
+                    <span className="block border border-red-600 bg-red-600 px-12 py-3 transition-transform active:border-red-500 active:bg-red-500 group-hover:-translate-x-1 group-hover:-translate-y-1">
+                      Delete
+                    </span>
+                  </button>
+                ) : (
+                  <></>
+                )}
               </div>
             </div>
           </div>
