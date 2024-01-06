@@ -39,15 +39,11 @@ const Banner = ({ onSearch }) => {
               <form onSubmit={handleSearch}>
                 <div className="flex w-full justify-center items-end">
                   <div className="relative mr-4 lg:w-full xl:w-1/2 w-2/4 md:w-full text-left">
-                    <label
-                      htmlFor="hero-field"
-                      className="leading-7 text-sm text-white"
-                    >
+                    <label className="leading-7 text-sm text-white">
                       Search via tags
                     </label>
                     <input
                       type="text"
-                      id="hero-field"
                       name="search"
                       value={searchText}
                       onChange={handleInputChange}

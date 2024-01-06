@@ -1,4 +1,4 @@
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import Container from "../../Shared/Container/Container";
 import { FaCommentAlt } from "react-icons/fa";
 import { AiOutlineLike } from "react-icons/ai";
@@ -14,6 +14,7 @@ const AllPostDetails = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   const postDetails = useLoaderData();
+  const navigate = useNavigate();
   const {
     title,
     authorName,
@@ -116,8 +117,32 @@ const AllPostDetails = () => {
         timer: 2000,
       });
       window.location.reload();
-      console.log(addComments.data);
     }
+  };
+
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.delete(`/posts/${id}`).then((res) => {
+          if (res.data.deletedCount > 0) {
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your post has been deleted.",
+              icon: "success",
+            });
+            navigate("/");
+          }
+        });
+      }
+    });
   };
 
   const postDate = new Date(date);
@@ -185,7 +210,7 @@ const AllPostDetails = () => {
               <div className="flex items-center gap-3">
                 <div>
                   <img
-                    className="w-14 h-14 rounded-full"
+                    className="w-20 h-20 rounded-full object-cover"
                     src={authorImg}
                     alt=""
                   />
@@ -224,11 +249,11 @@ const AllPostDetails = () => {
               </div>
               <div className="">
                 {user?.email === authorEmail ? (
-                  <button className="group relative inline-block text-sm font-medium w-full  text-white focus:outline-none focus:ring">
-                    <span className="absolute inset-0 border border-red-600 group-active:border-red-500"></span>
-                    <span className="block border border-red-600 bg-red-600 px-12 py-3 transition-transform active:border-red-500 active:bg-red-500 group-hover:-translate-x-1 group-hover:-translate-y-1">
-                      Delete
-                    </span>
+                  <button
+                    onClick={() => handleDelete(_id)}
+                    className="btn w-full btn-error"
+                  >
+                    Delete
                   </button>
                 ) : (
                   <></>
