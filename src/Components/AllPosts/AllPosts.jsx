@@ -13,6 +13,7 @@ const AllPosts = ({ count, search }) => {
   const totalPage = Math.ceil(count / itemPerPage);
   const pages = [...Array(totalPage).keys()];
   const [posts, isPending] = usePosts(currentPage, itemPerPage, search, sortBy);
+  console.log(posts);
   const handleSortByPopularity = () => {
     setSortBy("popularity");
     setCurrentPage(0);

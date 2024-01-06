@@ -27,8 +27,7 @@ const routes = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>,
-        loader: () =>
-          fetch("https://chat-canvas-server-site.vercel.app/postCount"),
+        loader: () => fetch("http://localhost:5000/postCount"),
       },
       {
         path: "/membership",
@@ -43,9 +42,7 @@ const routes = createBrowserRouter([
         path: "/post-details/:id",
         element: <AllPostDetails></AllPostDetails>,
         loader: ({ params }) =>
-          fetch(
-            `https://chat-canvas-server-site.vercel.app/posts/all/${params.id}`
-          ),
+          fetch(`http://localhost:5000/posts/all/${params.id}`),
       },
     ],
   },
@@ -94,9 +91,7 @@ const routes = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(
-            `https://chat-canvas-server-site.vercel.app/posts/all/${params.id}`
-          ),
+          fetch(`http://localhost:5000/posts/all/${params.id}`),
       },
       // admin routes
       {
@@ -106,8 +101,7 @@ const routes = createBrowserRouter([
             <AllUser></AllUser>
           </AdminRoute>
         ),
-        loader: () =>
-          fetch("https://chat-canvas-server-site.vercel.app/users-count"),
+        loader: () => fetch("http://localhost:5000/users-count"),
       },
       {
         path: "admin-profile",
@@ -132,8 +126,7 @@ const routes = createBrowserRouter([
             <ReportedComment></ReportedComment>
           </AdminRoute>
         ),
-        loader: () =>
-          fetch("https://chat-canvas-server-site.vercel.app/report-count"),
+        loader: () => fetch("http://localhost:5000/report-count"),
       },
     ],
   },

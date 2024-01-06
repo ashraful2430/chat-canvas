@@ -64,7 +64,9 @@ const Navlink = () => {
             <NavLink
               to={"/"}
               className={({ isActive }) =>
-                isActive ? " bg-none text-blue-500 font-bold" : ""
+                isActive
+                  ? " bg-none text-blue-500 font-bold"
+                  : "hover:text-blue-300 transition duration-100"
               }
             >
               Home
@@ -72,7 +74,9 @@ const Navlink = () => {
             <NavLink
               to={"/membership"}
               className={({ isActive }) =>
-                isActive ? " bg-none text-blue-500 font-bold" : ""
+                isActive
+                  ? " bg-none text-blue-500 font-bold"
+                  : "hover:text-blue-300 transition duration-100"
               }
             >
               Membership

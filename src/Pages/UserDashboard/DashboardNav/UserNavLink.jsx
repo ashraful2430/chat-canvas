@@ -47,7 +47,9 @@ const UserNavLink = () => {
                   <NavLink
                     to={"/"}
                     className={({ isActive }) =>
-                      isActive ? " bg-none text-blue-400 font-bold" : ""
+                      isActive
+                        ? " bg-none text-blue-400 font-bold"
+                        : "hover:text-blue-300 transition duration-100"
                     }
                   >
                     Home
@@ -55,7 +57,9 @@ const UserNavLink = () => {
                   <NavLink
                     to={"/dashboard/admin-profile"}
                     className={({ isActive }) =>
-                      isActive ? " bg-none text-blue-400 font-bold" : ""
+                      isActive
+                        ? " bg-none text-blue-400 font-bold"
+                        : "hover:text-blue-300 transition duration-100"
                     }
                   >
                     Admin Profile
@@ -63,7 +67,9 @@ const UserNavLink = () => {
                   <NavLink
                     to={"/dashboard/manage-users"}
                     className={({ isActive }) =>
-                      isActive ? " bg-none text-blue-400 font-bold" : ""
+                      isActive
+                        ? " bg-none text-blue-400 font-bold"
+                        : "hover:text-blue-300 transition duration-100"
                     }
                   >
                     Manage users
@@ -71,7 +77,9 @@ const UserNavLink = () => {
                   <NavLink
                     to={"/dashboard/reported"}
                     className={({ isActive }) =>
-                      isActive ? " bg-none text-blue-400 font-bold" : ""
+                      isActive
+                        ? " bg-none text-blue-400 font-bold"
+                        : "hover:text-blue-300 transition duration-100"
                     }
                   >
                     Reported comments
@@ -79,7 +87,9 @@ const UserNavLink = () => {
                   <NavLink
                     to={"/dashboard/make-announcement"}
                     className={({ isActive }) =>
-                      isActive ? " bg-none text-blue-400 font-bold" : ""
+                      isActive
+                        ? " bg-none text-blue-400 font-bold"
+                        : "hover:text-blue-300 transition duration-100"
                     }
                   >
                     Make Announcement
@@ -90,7 +100,9 @@ const UserNavLink = () => {
                   <NavLink
                     to={"/"}
                     className={({ isActive }) =>
-                      isActive ? " bg-none text-blue-400 font-bold" : ""
+                      isActive
+                        ? " bg-none text-blue-400 font-bold"
+                        : "hover:text-blue-300 transition duration-100"
                     }
                   >
                     Home
@@ -98,7 +110,9 @@ const UserNavLink = () => {
                   <NavLink
                     to={"/dashboard/My-profile"}
                     className={({ isActive }) =>
-                      isActive ? " bg-none text-blue-400 font-bold" : ""
+                      isActive
+                        ? " bg-none text-blue-400 font-bold"
+                        : "hover:text-blue-300 transition duration-100"
                     }
                   >
                     My Profile
@@ -106,7 +120,9 @@ const UserNavLink = () => {
                   <NavLink
                     to={"/dashboard/add-post"}
                     className={({ isActive }) =>
-                      isActive ? " bg-none text-blue-400 font-bold" : ""
+                      isActive
+                        ? " bg-none text-blue-400 font-bold"
+                        : "hover:text-blue-300 transition duration-100"
                     }
                   >
                     Add post
@@ -114,7 +130,9 @@ const UserNavLink = () => {
                   <NavLink
                     to={"/dashboard/my-post"}
                     className={({ isActive }) =>
-                      isActive ? " bg-none text-blue-400 font-bold" : ""
+                      isActive
+                        ? " bg-none text-blue-400 font-bold"
+                        : "hover:text-blue-300 transition duration-100"
                     }
                   >
                     My post
