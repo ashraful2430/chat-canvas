@@ -4,13 +4,12 @@ import logo from "../../assets/logo.png";
 import useAuth from "../../Hooks/useAuth";
 import { IoIosNotifications } from "react-icons/io";
 import useAnnouncement from "../../Hooks/useAnnouncement";
-import { useQuery } from "@tanstack/react-query";
-import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import useUser from "../../Hooks/useUser";
 
 const Navlink = () => {
   const { user, logout } = useAuth();
   const [announcement] = useAnnouncement();
-  const axiosPublic = useAxiosPublic();
+  const [users] = useUser();
   const handleLogOut = () => {
     logout()
       .then((result) => {
@@ -20,13 +19,7 @@ const Navlink = () => {
         console.error(error);
       });
   };
-  const { data: isAdmin = [] } = useQuery({
-    queryKey: ["isAdmin", user?.email],
-    queryFn: async () => {
-      const res = await axiosPublic.get(`/users/${user?.email}`);
-      return res.data;
-    },
-  });
+
   const defaultPhoto =
     "https://i.ibb.co/Fhm4brM/Screenshot-2023-11-25-145934.jpg";
   return (
@@ -104,8 +97,8 @@ const Navlink = () => {
               tabIndex={0}
               className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
             >
-              <li>
-                <p className="font-medium">{user.displayName}</p>
+              <li className="mx-auto">
+                <p className="font-medium text-center">{user.displayName}</p>
               </li>
               <li>
                 <button
@@ -116,14 +109,18 @@ const Navlink = () => {
                 </button>
               </li>
               <li>
-                {isAdmin === "admin" ? (
-                  <Link to={"/dashboard/admin-profile"}>
-                    <p className=" font-medium ml-10">Dashboard</p>
-                  </Link>
+                {users?.role === "admin" ? (
+                  <>
+                    <Link to={"/dashboard/admin-profile"}>
+                      <p className=" font-medium ml-10">Dashboard</p>
+                    </Link>
+                  </>
                 ) : (
-                  <Link to={"/dashboard/My-profile"}>
-                    <p className=" font-medium ml-10">Dashboard</p>
-                  </Link>
+                  <>
+                    <Link to={"/dashboard/My-profile"}>
+                      <p className=" font-medium ml-10">Dashboard</p>
+                    </Link>
+                  </>
                 )}
               </li>
             </ul>

@@ -265,7 +265,7 @@ const AllPostDetails = () => {
                 {user?.email === authorEmail ? (
                   <button
                     onClick={() => handleDelete(_id)}
-                    className="btn w-full btn-error"
+                    className="btn w-full btn-error text-white"
                   >
                     Delete
                   </button>
