@@ -1,8 +1,10 @@
 import PropTypes from "prop-types";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import { MdOutlineReportProblem } from "react-icons/md";
+import "aos/dist/aos.css";
+import Aos from "aos";
 
 const ReportTable = ({ repo, index }) => {
   const axiosSecure = useAxiosSecure();
@@ -38,9 +40,12 @@ const ReportTable = ({ repo, index }) => {
     setSelectedFeedback("");
     setIsReportButtonActive(false);
   };
+  useEffect(() => {
+    Aos.init({ duration: 1000 });
+  }, []);
   return (
     <>
-      <tr className="hover">
+      <tr data-aos="zoom-in" className="hover">
         <th>{index + 1}</th>
         <td>{commentUser}</td>
         <td>{title}</td>
