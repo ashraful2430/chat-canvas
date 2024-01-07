@@ -25,7 +25,7 @@ const AdminProfile = () => {
     );
   }
   return (
-    <div>
+    <div className="-z-50">
       <Container>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 p-10">
           <div className="lg:col-span-1 mx-auto md:mx-0 text-center md:text-left ">
@@ -59,7 +59,7 @@ const AdminProfile = () => {
             </div>
           </div>
         </div>
-        <div>
+        <div className="z-0">
           <h3 className="text-center text-2xl font-medium">Website stat</h3>
           <ShowStat></ShowStat>
         </div>
