@@ -1,10 +1,15 @@
 import PropTypes from "prop-types";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MdOutlineReportProblem } from "react-icons/md";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import "aos/dist/aos.css";
+import Aos from "aos";
 
 const ShowCommentTable = ({ coment, index, posts }) => {
+  useEffect(() => {
+    Aos.init({ duration: 2000 });
+  }, []);
   const axiosSecure = useAxiosSecure();
   const { commentUser, commentEmail, comment } = coment;
   const [selectedFeedback, setSelectedFeedback] = useState("");
@@ -41,7 +46,7 @@ const ShowCommentTable = ({ coment, index, posts }) => {
 
   return (
     <>
-      <tr className="hover">
+      <tr data-aos="zoom-in" className="hover">
         <th>{index + 1}</th>
         <td>{commentUser}</td>
         <td>{commentEmail}</td>
