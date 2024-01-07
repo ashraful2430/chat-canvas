@@ -4,11 +4,16 @@ import { MdDeleteForever } from "react-icons/md";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { Link } from "react-router-dom";
+import "aos/dist/aos.css";
+import Aos from "aos";
+import { useEffect } from "react";
 
 const PostTable = ({ post, index, refetch }) => {
   const { title, _id, upVote, downVote } = post;
   const axiosSecure = useAxiosSecure();
-
+  useEffect(() => {
+    Aos.init({ duration: 2000 });
+  }, []);
   const handleDelete = (id) => {
     Swal.fire({
       title: "Are you sure?",
@@ -35,7 +40,7 @@ const PostTable = ({ post, index, refetch }) => {
   };
   return (
     <>
-      <tr>
+      <tr data-aos="zoom-in-up">
         <th>{index + 1}</th>
         <td>{title}</td>
         <td>Up votes:{upVote}</td>

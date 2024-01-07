@@ -2,6 +2,9 @@ import PropTypes from "prop-types";
 import { FaUsers } from "react-icons/fa";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import "aos/dist/aos.css";
+import Aos from "aos";
+import { useEffect } from "react";
 
 const AllUserTable = ({ user, index, refetch }) => {
   const { name, email, badge } = user;
@@ -31,10 +34,13 @@ const AllUserTable = ({ user, index, refetch }) => {
       }
     });
   };
+  useEffect(() => {
+    Aos.init({ duration: 2000 });
+  }, []);
 
   return (
     <>
-      <tr className="hover">
+      <tr data-aos="zoom-in-up" className="hover">
         <th>{index + 1}</th>
         <td>{name}</td>
         <td>{email}</td>
