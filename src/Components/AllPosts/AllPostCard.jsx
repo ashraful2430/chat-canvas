@@ -1,4 +1,7 @@
+import Aos from "aos";
+import "aos/dist/aos.css";
 import PropTypes from "prop-types";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const AllPostCard = ({ post }) => {
@@ -15,12 +18,15 @@ const AllPostCard = ({ post }) => {
     upVote,
     downVote,
   } = post;
+  useEffect(() => {
+    Aos.init({ duration: 1500 });
+  }, []);
 
   return (
     <>
       <Link to={`/post-details/${_id}`}>
         <div className="card h-full  bg-base-100 shadow-xl hover:shadow-2xl mt-10">
-          <div className="card-body">
+          <div data-aos="zoom-in-up" className="card-body">
             <h2 className="card-title">{title}</h2>
             <p>{details}</p>
             <p className=" mt-5  ">Tag: #{tag}</p>
@@ -41,6 +47,7 @@ const AllPostCard = ({ post }) => {
               <p className="mt-2 font-medium">
                 Publish Date: {date.slice(0, 10)}
               </p>
+              <p>heda</p>
             </div>
             <div className="">
               <p> Comments: {commentCount}</p>
