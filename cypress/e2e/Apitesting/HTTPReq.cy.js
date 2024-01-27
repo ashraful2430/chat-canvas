@@ -9,4 +9,19 @@ describe("HTTP req", () => {
       .its("status")
       .should("equal", 200);
   });
+
+  it("post method", () => {
+    cy.request({
+      method: "POST",
+      url: "https://chat-canvas-server-site.vercel.app/comments",
+      body: {
+        comment: "this is a good post",
+        postId: "6563100c96a9c250d7538196",
+        commentUser: "ASHRAFUL ISLAM ASHIK",
+        commentEmail: "www.savage582@gmail.com",
+      },
+    })
+      .its("status")
+      .should("equal", 200);
+  });
 });
