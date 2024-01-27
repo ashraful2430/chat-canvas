@@ -6,7 +6,7 @@ const AllTags = () => {
     <>
       <Container>
         <div className="mt-10">
-          <h3 className="md:text-3xl font-medium text-center">
+          <h3 id="tag-title" className="md:text-3xl font-medium text-center">
             Explore Topics with Our Tag Library
           </h3>
           <Marquee pauseOnHover={true} speed={150}>

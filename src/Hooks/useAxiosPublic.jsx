@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosPublic = axios.create({
-  baseURL: "https://chat-canvas-server-site.vercel.app",
+  baseURL: "http://localhost:5000",
 });
 
 const useAxiosPublic = () => {
@@ -9,3 +9,5 @@ const useAxiosPublic = () => {
 };
 
 export default useAxiosPublic;
+
+// 'https://chat-canvas-server-site.vercel.app'

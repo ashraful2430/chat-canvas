@@ -1,5 +1,10 @@
 # Chat Canvas
 
+## Admin ID pass
+
+Admin email: admin@forum.com
+Admin Pass : 123456Q!A%4d
+
 ## Overview
 
 Welcome to the Forum Website – a platform for engaging discussions and interactions. This web application is built with React, Tailwind CSS, Daisy UI, MongoDB, Node.js, Express.js and user firebase for authentication. It provides users with a seamless experience for creating and participating in discussions on various topics.
@@ -7,6 +12,10 @@ Welcome to the Forum Website – a platform for engaging discussions and interac
 ## Live Link
 
 Go see my work from here [Chat Canvas](https://chat-canvas-725c3.web.app)
+
+## Backend GitHub Link
+
+Go see my backend code [here](https://github.com/ashraful2430/chat-canvas-backend)
 
 ## Features
 
