@@ -24,4 +24,14 @@ describe("HTTP req", () => {
       .its("status")
       .should("equal", 200);
   });
+
+  it("PUT call", () => {
+    cy.request({
+      method: "PATCH",
+      url: "https://chat-canvas-server-site.vercel.app/posts/upvote/6563100c96a9c250d7538196",
+      body: {},
+    })
+      .its("status")
+      .should("equal", 200);
+  });
 });
