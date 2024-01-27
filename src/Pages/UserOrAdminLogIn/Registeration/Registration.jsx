@@ -99,6 +99,7 @@ const Registration = () => {
                   Name
                 </label>
                 <input
+                  data-cy="reg-name"
                   id="reg-name"
                   className="block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg    focus:border-blue-400 focus:ring-opacity-40  focus:outline-none focus:ring focus:ring-blue-300"
                   type="text"
@@ -107,7 +108,9 @@ const Registration = () => {
                   placeholder="Your name"
                 />
                 {errors.name && (
-                  <span className="text-red-500">Your name is required</span>
+                  <span data-cy="reg-error-name" className="text-red-500">
+                    Your name is required
+                  </span>
                 )}
               </div>
               <div className="mt-4">
@@ -119,6 +122,7 @@ const Registration = () => {
                 </label>
                 <input
                   id="reg-email"
+                  data-cy="reg-email"
                   className="block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg    focus:border-blue-400 focus:ring-opacity-40  focus:outline-none focus:ring focus:ring-blue-300"
                   type="email"
                   name="email"
@@ -126,7 +130,9 @@ const Registration = () => {
                   placeholder="Your email"
                 />
                 {errors.email && (
-                  <span className="text-red-500">Your email is required</span>
+                  <span data-cy="reg-error-email" className="text-red-500">
+                    Your email is required
+                  </span>
                 )}
               </div>
 
@@ -144,6 +150,7 @@ const Registration = () => {
                 </div>
 
                 <input
+                  data-cy="reg-pass"
                   id="reg-pass"
                   className="block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg   focus:border-blue-400 focus:ring-opacity-40  focus:outline-none focus:ring focus:ring-blue-300"
                   type={showPass ? "text" : "password"}
@@ -156,20 +163,14 @@ const Registration = () => {
                   })}
                   placeholder="********"
                 />
-                {errors.password?.type === "minLength" && (
-                  <span className="text-red-400">
-                    Password must have at least one uppercase one lower case and
-                    a special letter
-                  </span>
-                )}
-                {errors.password?.type === "pattern" && (
-                  <span className="text-red-400">
-                    Password must be at least 6 characters
-                  </span>
-                )}
-                {errors.password?.type === "maxLength" && (
-                  <span className="text-red-400">
-                    Password must be under 20 characters
+                {errors.password && (
+                  <span data-cy="reg-error-pass" className="text-red-500">
+                    {errors.password.type === "minLength" &&
+                      "Password must have at least one uppercase, one lower case, and a special letter"}
+                    {errors.password.type === "pattern" &&
+                      "Password must be at least 6 characters"}
+                    {errors.password.type === "maxLength" &&
+                      "Password must be under 20 characters"}
                   </span>
                 )}
                 <p
@@ -182,6 +183,7 @@ const Registration = () => {
 
               <div className="mt-6">
                 <button
+                  data-cy="reg-button"
                   id="reg-button"
                   type="submit"
                   className="w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-gray-800 rounded-lg hover:bg-gray-700 focus:outline-none focus:ring focus:ring-gray-300 focus:ring-opacity-50"
