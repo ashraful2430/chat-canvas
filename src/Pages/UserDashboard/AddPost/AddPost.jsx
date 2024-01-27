@@ -12,6 +12,7 @@ const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 const AddPost = () => {
   const { user } = useAuth();
+
   const axiosSecure = useAxiosSecure();
   const axiosPublic = useAxiosPublic();
   const [limit, setLimit] = useState([]);
@@ -58,8 +59,9 @@ const AddPost = () => {
           authorImg: res.data.data.display_url,
           date: new Date(),
         };
+
         const addedPost = await axiosSecure.post("/posts", postInfo);
-        console.log(addedPost);
+
         if (addedPost.data.insertedId) {
           reset();
           Swal.fire({
@@ -70,6 +72,7 @@ const AddPost = () => {
             timer: 2000,
           });
           refetch();
+          navigate("/dashboard/my-post");
         }
       }
     } else if (limit.badge === "Gold") {
@@ -92,7 +95,7 @@ const AddPost = () => {
           date: new Date(),
         };
         const addedPost = await axiosSecure.post("/posts", postInfo);
-        console.log(addedPost);
+
         if (addedPost.data.insertedId) {
           reset();
           Swal.fire({
@@ -103,6 +106,7 @@ const AddPost = () => {
             timer: 2000,
           });
           refetch();
+          navigate("/dashboard/my-post");
         }
       }
     } else {
@@ -119,7 +123,7 @@ const AddPost = () => {
     <>
       {limit.badge === "Bronze" && postCount >= 5 ? (
         <>
-          <p>You have to become premium meber</p>
+          <p>You have to become premium member</p>
         </>
       ) : (
         <div>
@@ -138,6 +142,7 @@ const AddPost = () => {
                       <span className="label-text">Your Name*</span>
                     </label>
                     <input
+                      data-cy="author-name"
                       type="text"
                       placeholder="Author Name"
                       defaultValue={user.displayName}
@@ -157,6 +162,7 @@ const AddPost = () => {
                       <span className="label-text">Your email*</span>
                     </label>
                     <input
+                      data-cy="author-email"
                       type="email"
                       placeholder="Author email"
                       defaultValue={user.email}
@@ -179,6 +185,7 @@ const AddPost = () => {
                       <span className="label-text">Tags*</span>
                     </label>
                     <select
+                      data-cy="post-tag"
                       value={watch("tag") || ""}
                       name="tags"
                       {...register("tag", { required: true })}
@@ -205,6 +212,7 @@ const AddPost = () => {
                       <span className="label-text">Post title*</span>
                     </label>
                     <input
+                      data-cy="post-title"
                       type="text"
                       placeholder="Title"
                       name="title"
@@ -223,6 +231,7 @@ const AddPost = () => {
                       <span className="label-text">Post Details*</span>
                     </label>
                     <textarea
+                      data-cy="post-details"
                       className="textarea textarea-bordered h-32"
                       name="details"
                       {...register("details", { required: true })}
@@ -237,6 +246,7 @@ const AddPost = () => {
 
                 <div>
                   <input
+                    data-cy="image-input"
                     type="file"
                     {...register("authorImg", { required: true })}
                     className="file-input file-input-bordered w-full max-w-xs mt-7"
@@ -248,6 +258,7 @@ const AddPost = () => {
                 </div>
                 <div>
                   <button
+                    data-cy="add-post"
                     className=" bg-blue-400 text-white py-3 px-5 rounded-md mt-5"
                     type="submit"
                   >

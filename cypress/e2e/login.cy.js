@@ -12,7 +12,6 @@ describe("Login", () => {
     cy.get('[data-cy="login-pass"]').type("123456Q!A%4d");
     cy.get('[data-cy="login-button"]').click();
 
-    // Confirm successful login
     cy.url().should("include", "http://localhost:5173/");
   });
 });
