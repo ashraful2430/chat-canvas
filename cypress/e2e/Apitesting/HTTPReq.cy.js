@@ -28,8 +28,17 @@ describe("HTTP req", () => {
   it("PUT call", () => {
     cy.request({
       method: "PATCH",
-      url: "https://chat-canvas-server-site.vercel.app/posts/upvote/6563100c96a9c250d7538196",
+      url: "https://chat-canvas-server-site.vercel.app/posts/upvote/65992726400ed26212828981",
       body: {},
+    })
+      .its("status")
+      .should("equal", 200);
+  });
+
+  it("DELETE call", () => {
+    cy.request({
+      method: "DELETE",
+      url: "https://chat-canvas-server-site.vercel.app/posts/65b52abb63f49be767faf64c",
     })
       .its("status")
       .should("equal", 200);
