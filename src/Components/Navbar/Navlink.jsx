@@ -111,7 +111,7 @@ const Navlink = () => {
               <li>
                 {users?.role === "admin" ? (
                   <>
-                    <Link to={"/dashboard/admin-profile"}>
+                    <Link data-cy="admin-dash" to={"/dashboard/admin-profile"}>
                       <p className=" font-medium ml-10">Dashboard</p>
                     </Link>
                   </>

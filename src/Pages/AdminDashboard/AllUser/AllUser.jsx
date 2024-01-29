@@ -95,9 +95,9 @@ const AllUser = () => {
         </form>
         <div>
           <div className="overflow-x-auto z-0">
-            <table className="table">
+            <table data-cy="user-table" className="table">
               {/* head */}
-              <thead>
+              <thead data-cy="user-table-head">
                 <tr>
                   <th>#</th>
                   <th>Name</th>

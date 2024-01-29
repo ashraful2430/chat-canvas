@@ -45,11 +45,11 @@ const ReportTable = ({ repo, index }) => {
   }, []);
   return (
     <>
-      <tr data-aos="zoom-in" className="hover">
+      <tr data-cy="reported-table" data-aos="zoom-in" className="hover">
         <th>{index + 1}</th>
-        <td>{commentUser}</td>
-        <td>{title}</td>
-        <td>
+        <td data-cy="reported-comment-user">{commentUser}</td>
+        <td data-cy="reported-comment-title">{title}</td>
+        <td data-cy="reported-comment-details">
           {slicedComment}{" "}
           {comment.length > 20 && (
             <span
@@ -62,7 +62,7 @@ const ReportTable = ({ repo, index }) => {
             </span>
           )}
         </td>
-        <td>{selectedFeedback}</td>
+        <td data-cy="reported-comment-feedback">{selectedFeedback}</td>
         <td>
           <select
             name="feedback"
@@ -84,6 +84,8 @@ const ReportTable = ({ repo, index }) => {
         </td>
         <td>
           <button
+            data-cy="reported-comment-button"
+            id="report-button"
             disabled={!isReportButtonActive}
             onClick={handleSubmitReport}
             className={`text-3xl ${

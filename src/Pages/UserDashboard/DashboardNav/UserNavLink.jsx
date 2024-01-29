@@ -65,6 +65,7 @@ const UserNavLink = () => {
                     Admin Profile
                   </NavLink>
                   <NavLink
+                    data-cy="manage-user"
                     to={"/dashboard/manage-users"}
                     className={({ isActive }) =>
                       isActive

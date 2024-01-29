@@ -40,11 +40,11 @@ const AllUserTable = ({ user, index, refetch }) => {
 
   return (
     <>
-      <tr data-aos="zoom-in-up" className="hover">
+      <tr data-cy="user-table-row" data-aos="zoom-in-up" className="hover">
         <th>{index + 1}</th>
-        <td>{name}</td>
+        <td data-cy="user-name">{name}</td>
         <td>{email}</td>
-        <td>
+        <td data-cy="user-badge">
           {badge === "Gold" ? (
             <>
               <p>Premium member</p>
@@ -55,7 +55,7 @@ const AllUserTable = ({ user, index, refetch }) => {
             </>
           )}
         </td>
-        <td>
+        <td data-cy="user-role">
           {user?.role === "admin" ? (
             <p className="text-green-600">Admin</p>
           ) : (

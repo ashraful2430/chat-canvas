@@ -19,7 +19,7 @@ const AllPostCard = ({ post }) => {
     downVote,
   } = post;
   useEffect(() => {
-    Aos.init({ duration: 100 });
+    Aos.init({ duration: 1500 });
   }, []);
 
   return (
