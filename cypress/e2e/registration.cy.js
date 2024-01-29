@@ -2,7 +2,7 @@ describe("Registration", () => {
   it("Register new users", () => {
     cy.visit("http://localhost:5173/register");
     cy.get('[data-cy="reg-name"]').type("John Doe");
-    cy.get('[data-cy="reg-email"]').type("cypres@test8.com");
+    cy.get('[data-cy="reg-email"]').type("cypres@test9.com");
     cy.get('[data-cy="reg-pass"]').type("123456Q!A%4d");
     cy.get('[data-cy="reg-button"]').click();
 

@@ -25,10 +25,10 @@ describe("HTTP req", () => {
       .should("equal", 200);
   });
 
-  it("PUT call", () => {
+  it("PATCH call", () => {
     cy.request({
       method: "PATCH",
-      url: "https://chat-canvas-server-site.vercel.app/posts/upvote/65992726400ed26212828981",
+      url: "https://chat-canvas-server-site.vercel.app/posts/upvote/65992740400ed26212828982",
       body: {},
     })
       .its("status")
@@ -38,7 +38,7 @@ describe("HTTP req", () => {
   it("DELETE call", () => {
     cy.request({
       method: "DELETE",
-      url: "https://chat-canvas-server-site.vercel.app/posts/65b52abb63f49be767faf64c",
+      url: "https://chat-canvas-server-site.vercel.app/posts/65b52f721a282f026c968293",
     })
       .its("status")
       .should("equal", 200);
