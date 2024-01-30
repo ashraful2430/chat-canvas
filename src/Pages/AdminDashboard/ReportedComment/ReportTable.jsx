@@ -66,7 +66,7 @@ const ReportTable = ({ repo, index }) => {
         <td>
           <select
             name="feedback"
-            id="feedback"
+            id="feedback-report"
             value={selectedFeedbackes}
             onChange={handleFeedbackSelect}
           >

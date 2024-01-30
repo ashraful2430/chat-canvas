@@ -14,4 +14,9 @@ describe("Reported Table", () => {
   it.skip("Checking if the button is disabled or not", () => {
     cy.get('[data-cy="reported-comment-button"]').should("be.disabled");
   });
+  it("Checking if the button is active or not after selecting action", () => {
+    const report1 = cy.get("#feedback-report").select("You have been warn");
+    cy.log(report1);
+    cy.get('[data-cy="reported-comment-button"]').should("be.enabled");
+  });
 });
