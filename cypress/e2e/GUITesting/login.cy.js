@@ -8,7 +8,7 @@ describe("Login", () => {
 
   it("logs in with valid credentials", () => {
     cy.visit("http://localhost:5173/login");
-    cy.get('[data-cy="login-email"]').type("cypres@test7.com");
+    cy.get('[data-cy="login-email"]').type("afra@ashik.com");
     cy.get('[data-cy="login-pass"]').type("123456Q!A%4d");
     cy.get('[data-cy="login-button"]').click();
 

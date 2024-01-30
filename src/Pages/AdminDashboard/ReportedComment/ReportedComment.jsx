@@ -40,7 +40,7 @@ const ReportedComment = () => {
           Reported Comments
         </h3>
         <div className="overflow-x-auto">
-          <table className="table">
+          <table data-cy="main-table" className="table">
             {/* head */}
             <thead data-cy="reported-head">
               <tr>
@@ -53,7 +53,7 @@ const ReportedComment = () => {
                 <th>Report</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody id="reported-table-body">
               {report.map((repo, index) => (
                 <ReportTable
                   key={repo._id}

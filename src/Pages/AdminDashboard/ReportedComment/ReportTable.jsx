@@ -45,7 +45,7 @@ const ReportTable = ({ repo, index }) => {
   }, []);
   return (
     <>
-      <tr data-cy="reported-table" data-aos="zoom-in" className="hover">
+      <tr data-cy="reported-table" className="hover">
         <th>{index + 1}</th>
         <td data-cy="reported-comment-user">{commentUser}</td>
         <td data-cy="reported-comment-title">{title}</td>
