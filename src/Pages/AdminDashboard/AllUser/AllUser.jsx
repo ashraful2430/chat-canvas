@@ -106,7 +106,7 @@ const AllUser = () => {
                   <th>Roll</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody data-cy="user-table-body">
                 {users.map((user, index) => (
                   <AllUserTable
                     key={user._id}
@@ -117,7 +117,7 @@ const AllUser = () => {
                 ))}
               </tbody>
             </table>
-            <div className="text-center mt-20 ">
+            <div data-cy="pagination" className="text-center mt-20 ">
               <button
                 onClick={handlePrevPage}
                 className="btn btn-square bg-blue-500 text-white"
@@ -126,6 +126,8 @@ const AllUser = () => {
               </button>
               {pages.map((page, index) => (
                 <button
+                  id="user-table-button"
+                  data-cy=""
                   key={index}
                   onClick={() => setCurrentPage(page)}
                   className={`btn btn-square ml-2 text-white ${

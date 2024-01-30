@@ -40,7 +40,7 @@ const AllUserTable = ({ user, index, refetch }) => {
 
   return (
     <>
-      <tr data-cy="user-table-row" data-aos="zoom-in-up" className="hover">
+      <tr data-cy="user-table-row" className="hover">
         <th>{index + 1}</th>
         <td data-cy="user-name">{name}</td>
         <td>{email}</td>
