@@ -33,7 +33,6 @@ const ReportedComment = () => {
     }
   };
 
-  console.log(report);
   return (
     <>
       <Container>
@@ -43,7 +42,7 @@ const ReportedComment = () => {
         <div className="overflow-x-auto">
           <table className="table">
             {/* head */}
-            <thead>
+            <thead data-cy="reported-head">
               <tr>
                 <th>#</th>
                 <th>Name</th>

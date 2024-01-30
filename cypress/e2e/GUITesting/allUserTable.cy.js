@@ -2,16 +2,16 @@ describe("All User Table", () => {
   beforeEach(() => {
     cy.visit("http://localhost:5173/dashboard/manage-users");
   });
-  it.skip("Check Numbers Rows and Colum", () => {
+  it("Check Numbers Rows and Colum", () => {
     cy.get('[data-cy="user-table-row"]').should("have.length", "10");
     cy.get('[data-cy="user-table-head"]>tr>th').should("have.length", "5");
   });
-  it.skip("Check Cell data from specific row and colum", () => {
+  it("Check Cell data from specific row and colum", () => {
     cy.get('[data-cy="user-table-row"]:nth-child(5)>td:nth-child(4)').contains(
       "Normal member"
     );
   });
-  it.skip("Read all the row and colum data on the first page", () => {
+  it("Read all the row and colum data on the first page", () => {
     cy.get('[data-cy="user-table-row"]').each(($row, index, $rows) => {
       cy.wrap($row).within(() => {
         cy.get("td:nth-child(2)").each(($col, index, $cols) => {

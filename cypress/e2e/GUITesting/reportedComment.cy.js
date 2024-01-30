@@ -1,8 +1,9 @@
-// describe("Report Table", () => {
-//   it("Report Comments", () => {
-//     cy.visit("http://localhost:5173/dashboard/reported");
-//     // cy.get('[data-cy="reported-comment-user"]').should("exist");
-//     // cy.get('select[name="feedback"]').select("You have been warn");
-//     cy.get('[data-cy="reported-table"]').should("exist");
-//   });
-// });
+describe("Reported Table", () => {
+  beforeEach(() => {
+    cy.visit("http://localhost:5173/dashboard/reported");
+  });
+  it("Checks The row and cols", () => {
+    cy.get('[data-cy="reported-table"]').should("have.length", "10");
+    cy.get('[data-cy="reported-head"]>tr>th').should("have.length", "7");
+  });
+});
